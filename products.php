@@ -13,7 +13,7 @@
   <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-  <script defer src="main.js"></script>
+  <script defer src="./main.js"></script>
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -59,8 +59,8 @@
                 <div class="flip-card-back rounded-4">
                   <p>Rating: ' . $row["rating"] . '</p>
                   <p class="px-2 m-2 overflow-auto" style="height:250px">' . $row["description"] . '</p>
-                  <button type="button" class="btn btn-light mx-2" style="min-width: 100px">More Info</button>
-                  <button type="button" class="btn btn-light mx-2" style="min-width: 100px">Review</button>
+                  <button type="button" class="btn btn-light mx-2 snack-page-btn" data-snack-id="' . $row["snackID"] . '" style="min-width: 100px">More Info</button>
+                  <button type="button" class="btn btn-light mx-2 product-review-btn" data-snack-id="' . $row["snackID"] . '" style="min-width: 100px">Review</button>
                   <p>' . $row["name"] . '</p>
                 </div>
               </div>
