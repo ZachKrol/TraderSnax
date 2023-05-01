@@ -52,23 +52,24 @@
             <div class="flip-card col-xl-3 col-lg-4 col-md-6 p-4">
               <div class="flip-card-inner">
                 <div class="flip-card-front rounded-4">
-                  <p>Rating: ' . $row["rating"] . '</p>
-                  <img src="./images/' . $row["pictureURL"] . '" alt="' . $row["name"] . '" style="height: 250px" />
-                  <p>' . $row["name"] . '</p>
+                  <p class="h5 mt-2">Rating: ' . $row["rating"] . '</p>
+                  <img class="m-2" src="./images/' . $row["pictureURL"] . '" alt="' . $row["name"] . '" style="height: 250px" />
+                  <p class="h3 mx-2 pt-5 pt-md-2" style="padding-top: 30px">' . $row["name"] . '</p>
                 </div>
                 <div class="flip-card-back rounded-4">
-                  <p>Rating: ' . $row["rating"] . '</p>
-                  <p class="px-2 m-2 overflow-auto" style="height:250px">' . $row["description"] . '</p>
-                  <button type="button" class="btn btn-light mx-2 snack-page-btn" data-snack-id="' . $row["snackID"] . '" style="min-width: 100px">More Info</button>
-                  <button type="button" class="btn btn-light mx-2 product-review-btn" data-snack-id="' . $row["snackID"] . '" style="min-width: 100px">Review</button>
-                  <p>' . $row["name"] . '</p>
+                  <p class="h5 mt-2">Rating: ' . $row["rating"] . '</p>
+                  <p class="lg-small px-3 m-2 overflow-auto" style="height:250px">' . $row["description"] . '</p>
+                  <div class="py-2">
+                    <button type="button" class="btn btn-light mx-2 snack-page-btn" data-snack-id="' . $row["snackID"] . '" style="min-width: 100px">More Info</button>
+                    <button type="button" class="btn btn-light mx-2 product-review-btn" data-snack-id="' . $row["snackID"] . '" style="min-width: 100px">Review</button>
+                  </div>
+                  <p class="h4 mx-2 pt-3 pt-md-0">' . $row["name"] . '</p>
                 </div>
               </div>
             </div>
           ';
         }
       }
-
       $conn->close();
       ?>
     </div>
@@ -79,11 +80,3 @@
 </body>
 
 </html>
-
-<!-- $row["ID"]
-$row["snackID"]
-$row["pictureURL"
-$row["name"]
-$row["description"
-$row["rating"]
-$row["type"] -->
