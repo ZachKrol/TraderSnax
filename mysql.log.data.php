@@ -6,4 +6,4 @@ $mysql_database = "";
 
 // DO NOT COMMIT TO REPO
 // Add to .gitignore 
-// This is just a template. Set these up yourself. 
+// This is just a template. Set these up yourself.
