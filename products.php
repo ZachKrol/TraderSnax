@@ -20,6 +20,15 @@
   <?php
   include 'navbar.php';
   ?>
+  <div class="alert alert-info">
+    <div class="d-none d-xl-block font-weight-bold">X-LARGE (XL)</div>
+    <div class="d-none d-lg-block d-xl-none font-weight-bold">LARGE (LG)</div>
+    <div class="d-none d-md-block d-lg-none font-weight-bold">MEDIUM (M)</div>
+    <div class="d-none d-sm-block d-md-none font-weight-bold">SMALL (SM)</div>
+    <div class="d-block d-sm-none alert font-weight-bold">
+      X-SMALL (Default)
+    </div>
+  </div>
   <div class="container py-3">
     <div class="row m-3">
       <div class="col-12 text-center align-self-center">
