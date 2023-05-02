@@ -150,7 +150,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body class="d-flex flex-column h-100">
 
   <?php
-  include 'navbar.php';
+  include 'newNavbarLogin.php';
   ?>
 
   <h1 class="text-center display-1"><b> Trader Snax</b></h1>
