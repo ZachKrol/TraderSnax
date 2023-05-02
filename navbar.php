@@ -10,12 +10,11 @@
     <div class="container-fluid clearfix">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="navbar-brand" target="_blank" href="https://github.com/ZachKrol/TraderSnax">
-            <img src="./images/TS_LOGO.png" alt="Logo" style="width:40px;" class="rounded-pill">
-          </a>
+          <a class="navbar-brand" href="">
+            <img src="./images/TS_LOGO.png" alt="Logo" style="width:40px;" class="rounded-pill"></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="index.php"><b>Trader Snax</b></a>
+          <a class="nav-link" href=""><b>Trader Snax</b></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="register.php">Register</a>
@@ -24,7 +23,7 @@
           <a class="nav-link" href="index.php">Sign In</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Review</a>
+          <a class="nav-link" href="review.php">Review</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="products.php">Products</a>

@@ -1,10 +1,5 @@
 <html>
 
-<head>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-
 <body>
   <nav class="navbar navbar-expand-sm bg-light justify-content-center sticky-top">
     <div class="container-fluid">
@@ -18,7 +13,7 @@
         <li class="nav-item dropdown">
           <!-- TO DO: INSERT USER NAME AND PHOTO -->
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-            <img src="img_avatar1.png" alt="Logo" style="width:40px;" class="rounded-pill">
+            <img src="profilePictures/default.png" alt="Logo" style="width:40px;" class="rounded-pill">
             first name</a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="profile.php">Profile</a></li>

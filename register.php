@@ -1,4 +1,3 @@
-#!/usr/local/bin/php
 <?php
 // Include config file
 $config = parse_ini_file("dbconfig.ini");
@@ -136,71 +135,67 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <!DOCTYPE html>
-<html lang="en" class="h-100">
+<html lang="en">
 
 <head>
   <title> Trader Snax </title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="icon" type="image/png" href="./images/TS_LOGO.png" />
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 </head>
 
-<body class="d-flex flex-column h-100">
+<body>
 
   <?php
   include 'navbar.php';
   ?>
 
   <h1 class="text-center display-1"><b> Trader Snax</b></h1>
-  <h3 class="display-6 text-center">Try snacks you've eaten.</h3>
-  <h3 class="display-6 text-center">Save those you want to try.</h3>
-  <h3 class="display-6 text-center">Tell your friends what's good.</h3>
-  <br>
+  <h6 class="display-6 text-center">Try snacks you've eaten.</h3>
+    <h6 class="display-6 text-center">Save those you want to try.</h3>
+      <h6 class="display-6 text-center">Tell your friends what's good.</h3>
+        <br>
 
-  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="w-75 container-sm border border-dark border-2 rounded shadow p-4 mb-4 bg-white">
-    <h3 class="text-uppercase text-center"><b> Register for Trader Snax </b></h3>
-    <div class="mb-3 mt-3">
-      <label for="fname" class="form-label">First Name:</label>
-      <input type="text" class="form-control  <?php echo (!empty($first_name_err)) ? 'is-invalid' : ''; ?>" id="fname" placeholder="Enter first name" name="fname" value="<?php echo $first_name; ?>">
-      <div class="invalid-feedback"><?php echo $first_name_err; ?></div>
-    </div>
-    <div class="mb-3 mt-3">
-      <label for="lname" class="form-label">Last Name:</label>
-      <input type="text" class="form-control <?php echo (!empty($last_name_err)) ? 'is-invalid' : ''; ?>" id="lname" placeholder="Enter last name" name="lname" value="<?php echo $last_name; ?>">
-      <div class="invalid-feedback"><?php echo $last_name_err; ?></div>
-    </div>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="w-75 container-sm border border-dark border-2 rounded shadow p-4 mb-4 bg-white">
+          <h3 class="text-uppercase text-center"><b> Register for Trader Snax </b></h3>
+          <div class="mb-3 mt-3">
+            <label for="fname" class="form-label">First Name:</label>
+            <input type="text" class="form-control  <?php echo (!empty($first_name_err)) ? 'is-invalid' : ''; ?>" id="fname" placeholder="Enter first name" name="fname" value="<?php echo $first_name; ?>">
+            <div class="invalid-feedback"><?php echo $first_name_err; ?></div>
+          </div>
+          <div class="mb-3 mt-3">
+            <label for="lname" class="form-label">Last Name:</label>
+            <input type="text" class="form-control <?php echo (!empty($last_name_err)) ? 'is-invalid' : ''; ?>" id="lname" placeholder="Enter last name" name="lname" value="<?php echo $last_name; ?>">
+            <div class="invalid-feedback"><?php echo $last_name_err; ?></div>
+          </div>
 
-    <div class="mb-3 mt-3">
-      <label for="uname" class="form-label">Email Address:</label>
-      <input type="text" class="form-control <?php echo (!empty($emailaddr_err)) ? 'is-invalid' : ''; ?>" id="emailaddr" placeholder="Enter email address" name="emailaddr" value="<?php echo $emailaddr; ?>">
-      <div class="invalid-feedback"><?php echo $emailaddr_err; ?></div>
-    </div>
-    <div class="mb-3 mt-3">
-      <label for="username" class="form-label">Username:</label>
-      <input type="text" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" id="username" placeholder="Enter username" name="username" value="<?php echo $username; ?>">
-      <div class="invalid-feedback"><?php echo $username_err; ?></div>
-    </div>
-    <div class="mb-3">
-      <label for="password" class="form-label">Password:</label>
-      <input type="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" id="password" placeholder="Enter password" name="password" value="<?php echo $password; ?>">
-      <div class="invalid-feedback"><?php echo $password_err; ?></div>
-    </div>
-    <div class="mb-3">
-      <label for="confirm_password" class="form-label">Re-enter Password:</label>
-      <input type="password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" id="confirm_password" placeholder="Enter password" name="confirm_password" value="<?php echo $confirm_password; ?>">
-      <div class="invalid-feedback"><?php echo $confirm_password_err; ?></div>
-    </div>
-    <div class="text-center w-75 d-grid mx-auto">
-      <button id="submit" type="submit" class="btn btn-outline-info btn-lg">Sign Up </button>
-    </div>
-    <br>
-  </form>
-  <?php
-  include 'footer.php';
-  ?>
+          <div class="mb-3 mt-3">
+            <label for="uname" class="form-label">Email Address:</label>
+            <input type="text" class="form-control <?php echo (!empty($emailaddr_err)) ? 'is-invalid' : ''; ?>" id="emailaddr" placeholder="Enter email address" name="emailaddr" value="<?php echo $emailaddr; ?>">
+            <div class="invalid-feedback"><?php echo $emailaddr_err; ?></div>
+          </div>
+          <div class="mb-3 mt-3">
+            <label for="username" class="form-label">Username:</label>
+            <input type="text" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" id="username" placeholder="Enter username" name="username" value="<?php echo $username; ?>">
+            <div class="invalid-feedback"><?php echo $username_err; ?></div>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password:</label>
+            <input type="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" id="password" placeholder="Enter password" name="password" value="<?php echo $password; ?>">
+            <div class="invalid-feedback"><?php echo $password_err; ?></div>
+          </div>
+          <div class="mb-3">
+            <label for="confirm_password" class="form-label">Re-enter Password:</label>
+            <input type="password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" id="confirm_password" placeholder="Enter password" name="confirm_password" value="<?php echo $confirm_password; ?>">
+            <div class="invalid-feedback"><?php echo $confirm_password_err; ?></div>
+          </div>
+          <div class="text-center w-75 d-grid mx-auto">
+            <button id="submit" type="submit" class="btn btn-outline-info btn-lg">Sign Up </button>
+          </div>
+          <br>
+        </form>
 </body>
 
 </html>
