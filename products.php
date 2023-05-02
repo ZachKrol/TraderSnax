@@ -18,7 +18,7 @@
 
 <body class="d-flex flex-column h-100">
   <?php
-  include 'navbar.php';
+  include 'newNavbar.php';
   ?>
   <div class="container py-3">
     <div class="row m-3">
