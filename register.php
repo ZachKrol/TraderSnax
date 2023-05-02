@@ -194,6 +194,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </div>
           <div class="text-center w-75 d-grid mx-auto">
             <button id="submit" type="submit" class="btn btn-outline-info btn-lg">Sign Up </button>
+            <br>
+            <button type="button" class="btn btn-outline-info btn-lg"><a class="nav-link" href="index.php">If Already Registered Log In</a></button>
           </div>
           <br>
         </form>
