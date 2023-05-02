@@ -1,20 +1,14 @@
 #!/usr/local/bin/php
 <?php
-require_once('./mysql.log.data.php');
-$link = mysqli_connect($mysql_host, $mysql_login, $mysql_passw, $mysql_database);
+// Include config file
+$config = parse_ini_file("dbconfig.ini");
+
+//Database connection
+$link = new mysqli($config["servername"], $config["username"], $config["password"], $config["dbname"]);
+// Check connection
 if ($link->connect_error) {
-  die('connection failed:' . $connect->connect_error);
+  die("Connection failed: " . $link->connect_error);
 }
-
-// // Include config file
-// $config = parse_ini_file("dbconfig.ini");
-
-// //Database connection
-// $link = new mysqli($config["servername"], $config["username"], $config["password"], $config["dbname"]);
-// // Check connection
-// if ($link->connect_error) {
-//   die("Connection failed: " . $link->connect_error);
-// }
 
 // Define variables and initialize with empty values
 $username = $password = $confirm_password = $emailaddr = $first_name = $last_name = "";

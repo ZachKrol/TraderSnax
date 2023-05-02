@@ -20,31 +20,26 @@
   <?php
   include 'navbar.php';
   ?>
-  <div class="alert alert-info">
-    <div class="d-none d-xl-block font-weight-bold">X-LARGE (XL)</div>
-    <div class="d-none d-lg-block d-xl-none font-weight-bold">LARGE (LG)</div>
-    <div class="d-none d-md-block d-lg-none font-weight-bold">MEDIUM (M)</div>
-    <div class="d-none d-sm-block d-md-none font-weight-bold">SMALL (SM)</div>
-    <div class="d-block d-sm-none alert font-weight-bold">
-      X-SMALL (Default)
-    </div>
-  </div>
   <div class="container py-3">
     <div class="row m-3">
       <div class="col-12 text-center align-self-center">
-        <h2 class="mb-5 text-primary display-1">Products</h2>
+        <h2 class="mb-5 text-primary display-1"><b>Products</b></h2>
       </div>
     </div>
     <div class="row">
       <?php
-      require_once("./mysql.log.data.php");
-      $conn = mysqli_connect($mysql_host, $mysql_login, $mysql_passw, $mysql_database);
-      if ($conn->connect_error) {
-        die("connection failed:" . $conn->connect_error);
+      // Include config file
+      $config = parse_ini_file("dbconfig.ini");
+
+      //Database connection
+      $link = new mysqli($config["servername"], $config["username"], $config["password"], $config["dbname"]);
+      // Check connection
+      if ($link->connect_error) {
+        die("Connection failed: " . $link->connect_error);
       }
 
       $sql = "SELECT ID, snackID, pictureURL, name, description, rating, type FROM snacks";
-      $result = $conn->query($sql);
+      $result = $link->query($sql);
 
       if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
@@ -52,25 +47,29 @@
             <div class="flip-card col-xl-3 col-lg-4 col-md-6 p-4">
               <div class="flip-card-inner">
                 <div class="flip-card-front rounded-4">
-                  <p class="h5 mt-2">Rating: ' . $row["rating"] . '</p>
-                  <img class="m-2" src="./images/' . $row["pictureURL"] . '" alt="' . $row["name"] . '" style="height: 250px" />
-                  <p class="h3 mx-2 pt-5 pt-md-2" style="padding-top: 30px">' . $row["name"] . '</p>
+                  <p class="h5 mt-3" style="color: #146c43"><span class="small">Rating: </span>' . $row["rating"] . '</p>
+                  <div class="d-flex align-items-center justify-content-center" style="height: 250px; width: 100%">
+                    <img class="m-2" src="./images/' . $row["pictureURL"] . '" alt="' . $row["name"] . '" style="max-height: 90%; max-width: 90%;" />
+                  </div>
+                  <p class="h3 mx-2 pt-5 pt-md-2">' . $row["name"] . '</p>
+                  <p class="h6 text-secondary mx-2 pt-3 pt-md-0">' . $row["type"] . '</p>
                 </div>
                 <div class="flip-card-back rounded-4">
-                  <p class="h5 mt-2">Rating: ' . $row["rating"] . '</p>
-                  <p class="lg-small px-3 m-2 overflow-auto" style="height:250px">' . $row["description"] . '</p>
+                  <p class="h5 mt-3" style="color: #a6e9d5"><span class="small">Rating: </span>' . $row["rating"] . '</p>
+                  <p class="lg-small px-1 m-2 overflow-auto" style="height:210px">' . $row["description"] . '</p>
                   <div class="py-2">
                     <button type="button" class="btn btn-light mx-2 snack-page-btn" data-snack-id="' . $row["snackID"] . '" style="min-width: 100px">More Info</button>
                     <button type="button" class="btn btn-light mx-2 product-review-btn" data-snack-id="' . $row["snackID"] . '" style="min-width: 100px">Review</button>
                   </div>
                   <p class="h4 mx-2 pt-3 pt-md-0">' . $row["name"] . '</p>
+                  <p class="h6 text-dark mx-2 pt-3 pt-md-0">' . $row["type"] . '</p>
                 </div>
               </div>
             </div>
           ';
         }
       }
-      $conn->close();
+      $link->close();
       ?>
     </div>
   </div>
