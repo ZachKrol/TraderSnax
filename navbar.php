@@ -10,8 +10,9 @@
     <div class="container-fluid clearfix">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="navbar-brand" href="">
-            <img src="./images/TS_LOGO.png" alt="Logo" style="width:40px;" class="rounded-pill"></a>
+          <a class="navbar-brand" href="https://github.com/ZachKrol/TraderSnax">
+            <img src="./images/TS_LOGO.png" alt="Logo" style="width:40px;" class="rounded-pill">
+          </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href=""><b>Trader Snax</b></a>

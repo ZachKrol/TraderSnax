@@ -1,3 +1,4 @@
+#!/usr/local/bin/php
 <?php
 // Include config file
 $config = parse_ini_file("dbconfig.ini");
@@ -135,7 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 
 <head>
   <title> Trader Snax </title>
@@ -146,7 +147,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 </head>
 
-<body>
+<body class="d-flex flex-column h-100">
 
   <?php
   include 'navbar.php';
@@ -196,6 +197,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </div>
           <br>
         </form>
+        <?php
+        include 'footer.php';
+        ?>
 </body>
 
 </html>
