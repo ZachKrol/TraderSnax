@@ -143,6 +143,9 @@ if ($link->connect_error) {
   </div>
 </section>
 </form>
+<?php
+include 'footer.php';
+?>
 </body>
 <!--
 <div class="row g-2">

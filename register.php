@@ -154,9 +154,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   ?>
 
   <h1 class="text-center display-1"><b> Trader Snax</b></h1>
-  <h6 class="display-6 text-center">Try snacks you've eaten.</h3>
-    <h6 class="display-6 text-center">Save those you want to try.</h3>
-      <h6 class="display-6 text-center">Tell your friends what's good.</h3>
+  <h3 class="display-6 text-center">Try snacks you've eaten.</h3>
+    <h3 class="display-6 text-center">Save those you want to try.</h3>
+      <h3 class="display-6 text-center">Tell your friends what's good.</h3>
         <br>
 
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="w-75 container-sm border border-dark border-2 rounded shadow p-4 mb-4 bg-white">

@@ -46,5 +46,8 @@
         </div>
     </div><!-- end row -->
 </div><!-- end container -->
+<?php
+include 'footer.php';
+?>
 </body>
 </html
