@@ -26,27 +26,6 @@ if ($_SESSION["loggedin"]) {
           <a class="nav-link" href="index.php"><b class="h4">Trader Snax</b></a>
         </li>
       </ul>
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="products.php">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="">Reviews</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="products.php">Products</a>
-        </li>
-        <li class="nav-item dropdown">
-          <!-- TO DO: INSERT USER NAME AND PHOTO -->
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-            <img src="profilePictures/default.png" alt="Logo" style="width:40px;" class="rounded-pill">
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="profile.php">Profile</a></li>
-            <li><a class="dropdown-item" href="logout.php">Log Out</a></li>
-          </ul>
-        </li>
-      </ul>
     </div>
   </nav>
 
