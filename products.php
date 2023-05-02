@@ -28,14 +28,18 @@
     </div>
     <div class="row">
       <?php
-      require_once("./mysql.log.data.php");
-      $conn = mysqli_connect($mysql_host, $mysql_login, $mysql_passw, $mysql_database);
-      if ($conn->connect_error) {
-        die("connection failed:" . $conn->connect_error);
+      // Include config file
+      $config = parse_ini_file("dbconfig.ini");
+
+      //Database connection
+      $link = new mysqli($config["servername"], $config["username"], $config["password"], $config["dbname"]);
+      // Check connection
+      if ($link->connect_error) {
+        die("Connection failed: " . $link->connect_error);
       }
 
       $sql = "SELECT ID, snackID, pictureURL, name, description, rating, type FROM snacks";
-      $result = $conn->query($sql);
+      $result = $link->query($sql);
 
       if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
@@ -65,7 +69,7 @@
           ';
         }
       }
-      $conn->close();
+      $link->close();
       ?>
     </div>
   </div>
@@ -75,5 +79,3 @@
 </body>
 
 </html>
-
-<!-- #146c43 -->

@@ -9,22 +9,15 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
   exit;
 }
 
+// Include config file
+$config = parse_ini_file("dbconfig.ini");
 
-require_once('./mysql.log.data.php');
-$link = mysqli_connect($mysql_host, $mysql_login, $mysql_passw, $mysql_database);
+//Database connection
+$link = new mysqli($config["servername"], $config["username"], $config["password"], $config["dbname"]);
+// Check connection
 if ($link->connect_error) {
-  die('connection failed:' . $connect->connect_error);
+  die("Connection failed: " . $link->connect_error);
 }
-
-// // Include config file
-// $config = parse_ini_file("dbconfig.ini");
-
-// //Database connection
-// $link = new mysqli($config["servername"], $config["username"], $config["password"], $config["dbname"]);
-// // Check connection
-// if ($link->connect_error) {
-//   die("Connection failed: " . $link->connect_error);
-// }
 
 // Define variables and initialize with empty values
 $username = $password = "";
@@ -82,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               $_SESSION["username"] = $username;
 
               // Redirect user to welcome page
-              header("location: register.php"); //change to products page 
+              header("location: products.php"); //change to products page 
             } else {
               // Password is not valid, display a generic error message
               $login_err = "Invalid username or password.";
@@ -145,10 +138,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <div class="valid-feedback">Valid.</div>
       <div class="invalid-feedback"><?php echo $password_err; ?></div>
     </div>
-    <!--<div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" id="myCheck" name="remember">
-                            <label class="form-check-label" for="myCheck">Remember Me.</label>
-                                </div>-->
+    <!-- <div class="form-check mb-3">
+      <input class="form-check-input" type="checkbox" id="myCheck" name="remember">
+      <label class="form-check-label" for="myCheck">Remember Me.</label>
+    </div> -->
     <div class="text-center w-75 d-grid mx-auto">
       <button type="submit" class="btn btn-outline-info btn-lg">Log In</button>
     </div>
