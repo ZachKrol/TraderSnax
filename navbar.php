@@ -15,7 +15,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="index.php"><b>Trader Snax</b></a>
+          <a class="nav-link" href=""><b>Trader Snax</b></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="register.php">Register</a>
@@ -24,7 +24,7 @@
           <a class="nav-link" href="index.php">Sign In</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Review</a>
+          <a class="nav-link" href="review.php">Review</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="products.php">Products</a>

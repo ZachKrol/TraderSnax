@@ -1,0 +1,82 @@
+.rating {
+  display: inline-block;
+  font-size: 0;
+  line-height: 0;
+}
+
+.rating input {
+  display: none;
+}
+
+.rating label {
+  display: inline-block;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #999;
+}
+
+.rating i {
+  position: relative;
+  display: inline-block;
+}
+
+.rating i.bi-star-fill:before {
+  content: "\2605";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #ffc107;
+}
+
+.rating i.bi-star:before {
+  content: "\2606";
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* Flip card container  */
+.flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 500px;
+  perspective: 1000px;
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* Flip on hover */
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Style the front side */
+.flip-card-front {
+  background-color: #cff4fc; /* Front color  */
+  color: black;
+}
+
+/* Style the back side */
+.flip-card-back {
+  background-color: dodgerblue; /* Back color */
+  color: white;
+  transform: rotateY(180deg);
+}
