@@ -111,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body class="d-flex flex-column h-100">
   <?php
-  include 'navbar.php';
+  include 'newNavbarLogin.php';
   ?>
 
   <h1 class="text-center display-1"><b>Trader Snax</b></h1>
@@ -145,6 +145,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div> -->
     <div class="text-center w-75 d-grid mx-auto">
       <button type="submit" class="btn btn-outline-info btn-lg">Log In</button>
+      <br>
+      <button type="button" class="btn btn-outline-info btn-lg"><a class="nav-link" href="register.php">Register</a></button>
     </div>
     <br>
   </form>
