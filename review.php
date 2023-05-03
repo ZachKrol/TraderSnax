@@ -108,6 +108,8 @@
         }
       }
     }
+  } else {
+    header("location: index.php");
   }
   ?>
   <div class="container py-4 d-flex justify-content-center align-items-center" style="height: 100% !important;" id="product-section">
