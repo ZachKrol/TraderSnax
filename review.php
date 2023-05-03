@@ -52,7 +52,7 @@
   if ($_SESSION["loggedin"]) {
     $username = $_SESSION["username"];
 
-    if ($snackName = $_GET['snackID']) { // should really be a _GET once product page is finished
+    if ($snackName = $_GET['snackID']) {
       $snackName = $_GET['snackID'];
     } else {
       $snackName = "No Snack Selected";
@@ -110,7 +110,7 @@
     }
   }
   ?>
-  <div class="container py-4 d-flex justify-content-center align-items-center" id="product-section">
+  <div class="container py-4 d-flex justify-content-center align-items-center" style="height: 100% !important;" id="product-section">
     <div class="row">
       <div class="col-md-6 my-5 my-md-0 max-height-md-500 max-height-sm-200">
         <div class="d-flex align-items-center justify-content-center h-100 overflow-auto">
