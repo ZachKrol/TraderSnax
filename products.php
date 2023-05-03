@@ -14,6 +14,9 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
   <script defer src="./main.js"></script>
+  <style>
+    @import url('https://fonts.cdnfonts.com/css/trader-joes');
+  </style>
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -23,7 +26,7 @@
   <div class="container py-3">
     <div class="row m-3">
       <div class="col-12 text-center align-self-center">
-        <h2 class="mb-5 text-primary display-1"><b>Products</b></h2>
+        <h2 class="mb-5 text-primary display-1" style="font-family: 'Trader Joes', sans-serif;"><b>Products</b></h2>
       </div>
     </div>
     <div class="row">
