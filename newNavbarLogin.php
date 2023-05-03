@@ -15,7 +15,7 @@ if ($_SESSION["loggedin"]) {
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-sm bg-info sticky-top">
+  <nav class="navbar navbar-expand-md bg-info sticky-top">
     <div class="container-fluid">
       <ul class="navbar-nav">
         <li class="nav-item">

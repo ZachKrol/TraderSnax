@@ -10,12 +10,11 @@ if ($_SESSION["loggedin"]) {
 }
 ?>
 <html>
-
 <head>
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-sm bg-info sticky-top">
+  <nav class="navbar navbar-expand-md bg-info sticky-top">
     <div class="container-fluid">
       <ul class="navbar-nav">
         <li class="nav-item">
@@ -38,13 +37,9 @@ if ($_SESSION["loggedin"]) {
         </li>
         <li class="nav-item dropdown">
           <!-- TO DO: INSERT USER NAME AND PHOTO -->
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+          <a class="navbar-brand" href="profile.php">
             <img src="profilePictures/default.png" alt="Logo" style="width:40px;" class="rounded-pill">
           </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="profile.php">Profile</a></li>
-            <li><a class="dropdown-item" href="logout.php">Log Out</a></li>
-          </ul>
         </li>
       </ul>
     </div>
