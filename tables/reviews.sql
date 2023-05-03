@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Table structure for table `reviews`
 --
 
 DROP TABLE IF EXISTS `reviews`;
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `reviews` (
 ) ENGINE=MyISAM AUTO_INCREMENT=1005 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `reviews`
 --
 
 INSERT INTO `reviews` (`reviewID`, `username`, `snackID`, `rating`, `reviewText`, `pictureURL`, `likes`) VALUES

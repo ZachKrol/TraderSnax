@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           // Bind result variables
           mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password);
           if (mysqli_stmt_fetch($stmt)) {
-            if (!password_verify($password, $hashed_password)) {
+            if (password_verify($password, $hashed_password)) {
               // Password is correct, so start a new session
               session_start();
               // Store data in session variables
@@ -101,7 +101,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="en" class="h-100">
 
 <head>
-  <title> Trader Snax </title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TraderSnax</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="icon" type="image/png" href="./images/TS_LOGO.png" />
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
