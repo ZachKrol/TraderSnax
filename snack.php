@@ -121,104 +121,115 @@
       </div>
     </div>
 
-
-    <div class="alert alert-info">
-      <div class="d-none d-xl-block font-weight-bold">X-LARGE (XL)</div>
-      <div class="d-none d-lg-block d-xl-none font-weight-bold">LARGE (LG)</div>
-      <div class="d-none d-md-block d-lg-none font-weight-bold">MEDIUM (M)</div>
-      <div class="d-none d-sm-block d-md-none font-weight-bold">SMALL (SM)</div>
-      <div class="d-block d-sm-none alert font-weight-bold">
-        X-SMALL (Default)
-      </div>
-    </div>
-
-
     <div class="row m-3 pt-3">
       <div class="col-12">
         <h4 class="display-3 text-primary" style="font-family: 'Trader Joes', sans-serif;">Reviews:</h4>
       </div>
-      <div class="col-12">
-        <div class="w-85 container-sm border border-dark border-2 rounded shadow p-4 mb-4 bg-white">
-          <div class="row">
-            <div class="col-auto d-flex align-items-center">
-              <img style="width:40px;" class="rounded-pill" src="./profilePictures/default.png" alt="profile picture">
-              <p class="my-auto ps-3">Username</p>
+
+      <?php
+      $sqlReviews = "SELECT username, rating, reviewText FROM reviews WHERE snackID = '$snackID'";
+      $reviewsResult = $link->query($sqlReviews);
+      //echo $link->error;
+
+      if ($reviewsResult->num_rows > 0) {
+        while ($review = $reviewsResult->fetch_assoc()) {
+          $stars = '';
+          $tempRating = $review["rating"];
+          $newRating = round($tempRating);
+
+          // star fill
+          if ($newRating == 1) {
+            $stars = '
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                    ';
+          } else if ($newRating == 2) {
+            $stars = '
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                    ';
+          } else if ($newRating == 3) {
+            $stars = '
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                    ';
+          } else if ($newRating == 4) {
+            $stars = '
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star"></i>
+                    ';
+          } else if ($newRating == 5) {
+            $stars = '
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    ';
+          } else {
+            $stars = '
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                    ';
+          };
+
+          echo '
+
+          <div class="col-12">
+            <div class="w-85 container-sm border border-dark border-2 rounded shadow p-4 mb-4 bg-white">
+              <div class="row">
+                <div class="col-auto d-flex align-items-center">
+                  <img style="width:40px;" class="rounded-pill" src="./profilePictures/default.png" alt="profile picture">
+                  <p class="my-auto ps-3">' . $review["username"] . '</p>
+                </div>
+              </div>
+              <div class="row mt-2">
+                <div class="col">' . $stars . '</div>
+              </div>
+              <div class="row pt-4">
+                <div class="col-auto">
+                  <p>' . $review["reviewText"] . '</p>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="row mt-2">
-            <div class="col">
-              <?php
-              $stars = '';
-              $newRating = round($rating);
-
-              // star fill
-              if ($newRating == 1) {
-                $stars = '
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star"></i>
-                <i class="bi bi-star"></i>
-                <i class="bi bi-star"></i>
-                <i class="bi bi-star"></i>
-                ';
-              } else if ($newRating == 2) {
-                $stars = '
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star"></i>
-                <i class="bi bi-star"></i>
-                <i class="bi bi-star"></i>
-                ';
-              } else if ($newRating == 3) {
-                $stars = '
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star"></i>
-                <i class="bi bi-star"></i>
-                ';
-              } else if ($newRating == 4) {
-                $stars = '
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star"></i>
-                ';
-              } else if ($newRating == 5) {
-                $stars = '
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                ';
-              } else {
-                $stars = '
-                <i class="bi bi-star"></i>
-                <i class="bi bi-star"></i>
-                <i class="bi bi-star"></i>
-                <i class="bi bi-star"></i>
-                <i class="bi bi-star"></i>
-                ';
-              };
-              echo $stars;
-              ?>
+        ';
+        }
+      } else {
+        echo '
+          <div class="col-12">
+            <div class="w-85 container-sm border border-dark border-2 rounded shadow p-4 mb-4 bg-white">
+              <div class="row">
+                <div class="col-12 d-flex align-items-center justify-content-center">
+                  <h4 class="h4 text-dark" style="font-family: \'Trader Joes\', sans-serif;">No Reviews Yet</h4>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="row pt-4">
-            <div class="col-auto">
-              <p><?php echo $description; ?></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
+        ';
+      }
+      ?>
+    </div><!-- end Review row -->
   </div><!-- end container -->
   <?php
   include 'footer.php';
   ?>
 </body>
 
-</html
+</html>
