@@ -38,7 +38,8 @@ if ($_SESSION["loggedin"]) {
 
 
 ?>
-<html>
+<!DOCTYPE html>
+<html lang="en" class="h-100">
 
 <head>
   <title> Trader Snax </title>
@@ -51,7 +52,7 @@ if ($_SESSION["loggedin"]) {
 
 </head>
 
-<body>
+<body class="d-flex flex-column h-100">
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
     <section class="h-100 gradient-custom-2">
       <div class="container py-5 h-100">
