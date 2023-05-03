@@ -10,7 +10,11 @@ if ($_SESSION["loggedin"]) {
 }
 ?>
 <html>
+
 <head>
+  <style>
+    @import url('https://fonts.cdnfonts.com/css/trader-joes');
+  </style>
 </head>
 
 <body>
@@ -22,7 +26,7 @@ if ($_SESSION["loggedin"]) {
             <img src="./images/TS_LOGO.png" alt="Logo" style="width:40px;" class="rounded-pill"></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="index.php"><b class="h4">Trader Snax</b></a>
+          <a class="nav-link" href="index.php"><b class="h4" style="font-family: 'Trader Joes', sans-serif;">Trader Snax</b></a>
         </li>
       </ul>
       <ul class="navbar-nav ms-auto">
