@@ -58,8 +58,8 @@
                   <p class="h5 mt-3" style="color: #a6e9d5"><span class="small">Rating: </span>' . $row["rating"] . '</p>
                   <p class="lg-small px-1 m-2 overflow-auto" style="height:210px">' . $row["description"] . '</p>
                   <div class="py-2">
-                    <button type="button" class="btn btn-light mx-2 snack-page-btn" data-snack-id="' . $row["snackID"] . '" style="min-width: 100px">More Info</button>
-                    <button type="button" class="btn btn-light mx-2 product-review-btn" data-snack-id="' . $row["snackID"] . '" style="min-width: 100px">Review</button>
+                    <button type="button" class="btn btn-light mx-2 snack-page-btn" data-snack-id="' . $row["snackID"] . '" style="min-width: 90px">More Info</button>
+                    <button type="button" class="btn btn-light mx-2 product-review-btn" data-snack-id="' . $row["snackID"] . '" style="min-width: 90px">Review</button>
                   </div>
                   <p class="h4 mx-2 pt-3 pt-md-0">' . $row["name"] . '</p>
                   <p class="h6 text-dark mx-2 pt-3 pt-md-0">' . $row["type"] . '</p>
