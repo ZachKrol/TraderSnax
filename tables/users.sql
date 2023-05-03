@@ -38,7 +38,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `aboutme` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `following` int NOT NULL DEFAULT 0,
   `followers` int NOT NULL DEFAULT 0,
-  `reviews` int NOT NULL DEFAULT 0, -- PROFILE PIC
+  `reviews` int NOT NULL DEFAULT 0,
+  `profilePicURL` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   PRIMARY KEY (`userID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1005 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -46,8 +47,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`userID`, `username`, `password`, `email`, `fname`, `lname`, `aboutme`, `following`, `followers`, `reviews`) VALUES
-(1000, 'test', '$2y$10$YRo4B2hJQeYXzq0PaUA7ROQB48Qj3iShDTCrpTPbGD03eOhCIBPuW', 'test@test.com', 'Daniel', 'Dos Santos', 'just testing tings', 233, 221 ,4);
+INSERT INTO `users` (`userID`, `username`, `password`, `email`, `fname`, `lname`, `aboutme`, `following`, `followers`, `reviews`, `profilePicURL`) VALUES
+(1000, 'test', '$2y$10$YRo4B2hJQeYXzq0PaUA7ROQB48Qj3iShDTCrpTPbGD03eOhCIBPuW', 'test@test.com', 'Daniel', 'Dos Santos', 'just testing tings', 233, 221 ,4, 'default.png');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

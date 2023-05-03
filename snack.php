@@ -9,12 +9,18 @@
   <title>TraderSnax</title>
   <link rel="icon" type="image/png" href="./images/TS_LOGO.png" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
   <script defer src="./main.js"></script>
   <style>
     @import url('https://fonts.cdnfonts.com/css/trader-joes');
+
+    i {
+      color: #ff9c1a;
+      content: "\f3e5";
+    }
 
     @media (max-width: 767.98px) {
       .max-height-sm-200 {
@@ -90,15 +96,6 @@
     header("location: index.php");
   }
   ?>
-  <div class="alert alert-info">
-    <div class="d-none d-xl-block font-weight-bold">X-LARGE (XL)</div>
-    <div class="d-none d-lg-block d-xl-none font-weight-bold">LARGE (LG)</div>
-    <div class="d-none d-md-block d-lg-none font-weight-bold">MEDIUM (M)</div>
-    <div class="d-none d-sm-block d-md-none font-weight-bold">SMALL (SM)</div>
-    <div class="d-block d-sm-none alert font-weight-bold">
-      X-SMALL (Default)
-    </div>
-  </div>
   <div class="container py-3">
     <div class="row m-3">
       <div class="col-12 text-center align-self-center">
@@ -123,10 +120,116 @@
         </div>
       </div>
     </div>
+
+    <div class="row m-3 pt-3">
+      <div class="col-12">
+        <h4 class="display-3 text-primary" style="font-family: 'Trader Joes', sans-serif;">Reviews:</h4>
+      </div>
+
+      <?php
+      $sqlReviews = "SELECT username, rating, reviewText FROM reviews WHERE snackID = '$snackID'";
+      $reviewsResult = $link->query($sqlReviews);
+      //echo $link->error;
+
+      if ($reviewsResult->num_rows > 0) {
+        while ($review = $reviewsResult->fetch_assoc()) {
+          $stars = '';
+          $tempRating = $review["rating"];
+          $newRating = round($tempRating);
+
+          // star fill
+          if ($newRating == 1) {
+            $stars = '
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                    ';
+          } else if ($newRating == 2) {
+            $stars = '
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                    ';
+          } else if ($newRating == 3) {
+            $stars = '
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                    ';
+          } else if ($newRating == 4) {
+            $stars = '
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star"></i>
+                    ';
+          } else if ($newRating == 5) {
+            $stars = '
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    ';
+          } else {
+            $stars = '
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                    <i class="bi bi-star"></i>
+                    ';
+          };
+
+          echo '
+
+          <div class="col-12">
+            <div class="w-85 container-sm border border-dark border-2 rounded shadow p-4 mb-4 bg-white">
+              <div class="row">
+                <div class="col-auto d-flex align-items-center">
+                  <img style="width:40px;" class="rounded-pill" src="./profilePictures/default.png" alt="profile picture">
+                  <p class="my-auto ps-3">' . $review["username"] . '</p>
+                </div>
+              </div>
+              <div class="row mt-2">
+                <div class="col">' . $stars . '</div>
+              </div>
+              <div class="row pt-4">
+                <div class="col-auto">
+                  <p>' . $review["reviewText"] . '</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        ';
+        }
+      } else {
+        echo '
+          <div class="col-12">
+            <div class="w-85 container-sm border border-dark border-2 rounded shadow p-4 mb-4 bg-white">
+              <div class="row">
+                <div class="col-12 d-flex align-items-center justify-content-center">
+                  <h4 class="h4 text-dark" style="font-family: \'Trader Joes\', sans-serif;">No Reviews Yet</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        ';
+      }
+      ?>
+    </div><!-- end Review row -->
   </div><!-- end container -->
   <?php
   include 'footer.php';
   ?>
 </body>
 
-</html
+</html>
