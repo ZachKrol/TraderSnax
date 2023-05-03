@@ -9,4 +9,10 @@ $(document).ready(function () {
     var snackID = $(this).data("snack-id");
     window.location.href = "snack.php?snackID=" + snackID;
   });
+
+  // $(document).on("click", ".snack-review-btn", function () {
+  //   console.log("clicked");
+  //   var snackID = $(this).data("snack-id");
+  //   window.location.href = "snack.php?snackID=" + snackID;
+  // });
 });
