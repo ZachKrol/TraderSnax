@@ -31,22 +31,24 @@
     </div>
     <div class="row">
       <?php
-      // Include config file
-      $config = parse_ini_file("dbconfig.ini");
+      session_start();
+      if ($_SESSION["loggedin"]) {
+        // Include config file
+        $config = parse_ini_file("dbconfig.ini");
 
-      //Database connection
-      $link = new mysqli($config["servername"], $config["username"], $config["password"], $config["dbname"]);
-      // Check connection
-      if ($link->connect_error) {
-        die("Connection failed: " . $link->connect_error);
-      }
+        //Database connection
+        $link = new mysqli($config["servername"], $config["username"], $config["password"], $config["dbname"]);
+        // Check connection
+        if ($link->connect_error) {
+          die("Connection failed: " . $link->connect_error);
+        }
 
-      $sql = "SELECT ID, snackID, pictureURL, name, description, rating, type FROM snacks";
-      $result = $link->query($sql);
+        $sql = "SELECT ID, snackID, pictureURL, name, description, rating, type FROM snacks";
+        $result = $link->query($sql);
 
-      if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-          echo '
+        if ($result->num_rows > 0) {
+          while ($row = $result->fetch_assoc()) {
+            echo '
             <div class="flip-card col-xl-3 col-lg-4 col-md-6 p-4">
               <div class="flip-card-inner">
                 <div class="flip-card-front rounded-4">
@@ -70,10 +72,15 @@
               </div>
             </div>
           ';
+          }
         }
+        $link->close();
+      } else {
+        header("location: index.php");
       }
-      $link->close();
       ?>
+
+
     </div>
   </div>
   <?php

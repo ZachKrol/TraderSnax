@@ -30,16 +30,13 @@ if ($_SESSION["loggedin"]) {
         </li>
       </ul>
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="products.php">Home</a>
+        <li class="nav-item bg-text-secondary mx-3">
+          <a class="nav-link px-3 rounded-4" style="background-color: #065b6c; color: white" href="products.php">View Products</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="">Reviews</a>
+        <li class="nav-item bg-text-secondary mx-3">
+          <a class="nav-link px-3 rounded-4" style="background-color: #065b6c; color: white" href="logout.php">Log Out</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="products.php">Products</a>
-        </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item mx-3">
           <!-- TO DO: INSERT USER NAME AND PHOTO -->
           <a class="navbar-brand" href="profile.php">
             <img src="profilePictures/default.png" alt="Logo" style="width:40px;" class="rounded-pill">
