@@ -2,19 +2,12 @@
 
 <head lang="en">
   <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <style>
     @import url('https://fonts.cdnfonts.com/css/trader-joes');
   </style>
-  <script>
-    function getUser(uname){
-        var dbParam = uname;
-
-        const xmlhttp = new XMLHttpRequest();
-        
-        xmlhttp.open("GET", "userPages.php?username=" + dbParam, true);
-        xmlhttp.send();
-    }
-  </script>
 </head>
 
 <body>
@@ -30,10 +23,10 @@
         </li>
       </ul>
       <ul class="navbar-nav mx-auto">
-        <form autocomplete="off" class="d-flex mb-0">
-          <input class="form-control me-2 rounded-pill" id="searchUser" name="searchUser" type="text" placeholder="Search Users" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-        </form>
-        <ul class="dropdown-menu" id="searchResults" name="searchResults" aria-labelledby="defaultDropdown">
+        <form autocomplete="off" class="d-flex mb-0" data-bs-toggle="dropdown">
+          <input class="form-control me-2 rounded-pill" id="searchUser" name="searchUser" type="text" placeholder="Search Users" >
+         </form>
+        <ul class="dropdown-menu" id="searchResults" name="searchResults" style="position: absolute; left: 0; top: 100%; z-index: 1;">
           <?php
           session_start();
           if ($_SESSION["loggedin"]) {
@@ -55,9 +48,11 @@
             $result = $link->query($sql);
             while ($record = $result->fetch_assoc()) {
               $username = $record['username'];
-              echo '<li class="dropdown-item"><a onClick="getUser(\'' . $username . '\')">' . $username . '</a></li>';
+              echo '<li><a class="dropdown-item" href="userPages.php?username=' . $username . '">' . $username . '</a></li>';
             }
           }
+
+          $link->close();
           ?>
         </ul>
       </ul>
