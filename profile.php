@@ -39,30 +39,26 @@ if ($_SESSION["loggedin"]) {
     $profilePicUrl = $profilePicUrl . $row["profilePicUrl"];
   }
 
-
-
-
-
-
   $sql = "SELECT snackID, pictureURL FROM reviews WHERE username = '$username'";
   $result = $link->query($sql);
 } else {
   header("location: index.php");
 }
 
-
 ?>
 <!DOCTYPE html>
 <html lang="en" class="h-100">
 
 <head>
-  <title> Trader Snax </title>
-  <style>
-    @import url('https://fonts.cdnfonts.com/css/trader-joes');
-  </style>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TraderSnax</title>
+  <link rel="icon" type="image/png" href="./images/TS_LOGO.png" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
   <script>
     function editProfile(uid, firstname, lastname, about, email, pfp) {
       document.getElementById("UID").value = uid;
@@ -73,6 +69,21 @@ if ($_SESSION["loggedin"]) {
       document.getElementById("pfp").value = pfp;
     };
   </script>
+  <style>
+    @import url('https://fonts.cdnfonts.com/css/trader-joes');
+
+    @media (max-width: 767.98px) {
+      .max-height-sm-200 {
+        max-height: 300px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .max-height-md-500 {
+        max-height: 300px;
+      }
+    }
+  </style>
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -143,14 +154,14 @@ if ($_SESSION["loggedin"]) {
                   <div style="width:150px;height:150px;">
                     <img src=<?php echo $profilePicUrl; ?> style="width:150px;height:150px;object-fit:cover;z-index:100" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2">
                   </div>
-                  <button onClick='editProfile(<?php echo $uid, $fname, $lname, $about, $email; ?>)' type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark" data-bs-toggle='modal' data-bs-target='#editModal' style="z-index: 1;">
+                  <button onClick='editProfile(<?php echo $uid, $fname, $lname, $about, $email; ?>)' type="button" class="btn btn-outline-dark m-2" data-mdb-ripple-color="dark" data-bs-toggle='modal' data-bs-target='#editModal' style="z-index: 1;">
                     Edit profile
                   </button>
-                  <input name="submit" type="submit" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;" value="Log out">
+                  <input name="submit" type="submit" class="btn btn-outline-dark m-2 mt-1" data-mdb-ripple-color="dark" style="z-index: 1;" value="Log out">
                   </input>
                 </div>
-                <div class="ms-3" style="margin-top: 130px;">
-                  <h5><?php echo $fullName; ?></h5>
+                <div class="ms-3" style="margin-top: 120px;">
+                  <h5 class="display-4"><?php echo $fullName; ?></h5>
                 </div>
               </div>
               <div class="p-4 text-black" style="background-color: #f8f9fa;">
@@ -177,8 +188,8 @@ if ($_SESSION["loggedin"]) {
                   </div>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                  <p class="lead fw-normal mb-0">Recent reviews</p>
-                  <p class="mb-0"><a href="#!" class="text-muted">Show all</a></p>
+                  <p class="lead fw-normal mb-0">Recent Reviews</p>
+                  <!-- <p class="mb-0"><a href="#!" class="text-muted">Show all</a></p> -->
                 </div>
                 <?php
                 $index = 0;
@@ -189,18 +200,23 @@ if ($_SESSION["loggedin"]) {
                     $pictureURL = $row["pictureURL"];
                     $item = "";
                     if ($index % 2 == 0) {
-                      $item .= '<div class="row g-2">';
+                      $item .= '<div class="row">';
                     }
                     //Need to add reviewURL soon
                     $fullURL = "images/" . $pictureURL;
-                    $item .= '<div style="text-align:center;"class="col mb-2">
-                    <a style="text-decoration: none; color: inherit;" href="review.php">
-                    <img style = "object-fit: cover; max-height: 225px;"src="' .
-                      $fullURL .
-                      '"alt="image 1" class="img-responsive w-100 rounded-3">
-                    <h3 class="lead fw-normal mb-1" style = "font-family: \'Trader Joes\', sans-serif;">' .
-                      $snackID .
-                      '</h3></a></div>';
+                    $item .= '
+                    <div class="col-6 p-2 max-height-md-500 max-height-sm-200">
+                      <a class="border border-dark border-2 rounded shadow py-5 d-flex flex-column align-items-center justify-content-center h-100" style="text-align: center; text-decoration: none; color: inherit;" href="snack.php?snackID=' . $snackID . '">
+                        <img style="max-height: 100%; max-width: 100%; height: auto;" src="' . $fullURL . '"alt="image 1" class="img-responsive">
+                        <h3 class="h6 m-2" style = "font-family: \'Trader Joes\', sans-serif;">' . $snackID . '</h3>
+                      </a>
+                    </div>';
+
+                    $something = '<div class="col-md-6 mb-5 mb-md-0 max-height-md-500 max-height-sm-200">
+                    <div class="d-flex align-items-center justify-content-center h-100 overflow-auto">
+                      <img style="max-height: 100%; max-width: 100%; height: auto;" src="<?php echo $fullURL; ?>" alt="<?php echo $pictureName; ?>" />
+                    </div>
+                  </div>';
 
                     if ($index % 2 == 1) {
                       $item .= '</div>';

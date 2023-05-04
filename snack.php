@@ -136,14 +136,11 @@
           $tempRating = $review["rating"];
           $newRating = round($tempRating);
 
-
           $reviewersUsername = $review["username"];
-
           $sqlGetPic = "SELECT * FROM users WHERE username = '$reviewersUsername'";
           $getPicResult = $link->query($sqlGetPic);
           $reviewersPic = $getPicResult->fetch_assoc();
           $reviewersURL = $reviewersPic["profilePicURL"];
-          echo $reviewersURL;
 
           // star fill
           if ($newRating == 1) {

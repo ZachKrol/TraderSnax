@@ -103,31 +103,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $profilePicURL = "";
 
 
-        if (file_exists($_FILES['ProfilePicture']['tmp_name']) && is_uploaded_file($_FILES['ProfilePicture']['tmp_name'])) {
-            $target_dir = "profilePictures/";
-            $target_file = $target_dir . basename($_FILES["ProfilePicture"]["name"]);
-            $filetype = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+    if (file_exists($_FILES['ProfilePicture']['tmp_name']) && is_uploaded_file($_FILES['ProfilePicture']['tmp_name'])) {
+        $target_dir = "profilePictures/";
+        $target_file = $target_dir . basename($_FILES["ProfilePicture"]["name"]);
+        $filetype = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+        $uploadOk = 1;
+        $check = getimagesize($_FILES["ProfilePicture"]["tmp_name"]);
+        if ($check !== false) {
             $uploadOk = 1;
-            $check = getimagesize($_FILES["ProfilePicture"]["tmp_name"]);
-            if ($check !== false) {
-                $uploadOk = 1;
-            } else {
-                $uploadOk = 0;
-            }
-            if ($uploadOk == 0) {
-                echo "Sorry, your file was not uploaded.";
-            } else {
-                if (move_uploaded_file($_FILES["ProfilePicture"]["tmp_name"], $target_dir . $username .  '.' . $filetype)) {
-                    echo "The file " . htmlspecialchars(basename($_FILES["ProfilePicture"]["name"])) . " has been uploaded.";
-                } else {
-                    echo "Sorry, there was an error uploading your file.";
-                }
-            }
-            $profilePicURL = $target_dir . $username .  '.' . $filetype;
         } else {
-            // user hasn't uploaded anything set to default profile picture
-            $profilePicURL = "profilePictures/default.png";
+            $uploadOk = 0;
         }
+        if ($uploadOk == 0) {
+            echo "Sorry, your file was not uploaded.";
+        } else {
+            if (move_uploaded_file($_FILES["ProfilePicture"]["tmp_name"], $target_dir . $username .  '.' . $filetype)) {
+                echo "The file " . htmlspecialchars(basename($_FILES["ProfilePicture"]["name"])) . " has been uploaded.";
+            } else {
+                echo "Sorry, there was an error uploading your file.";
+            }
+        }
+        $profilePicURL = $target_dir . $username .  '.' . $filetype;
+    } else {
+        // user hasn't uploaded anything set to default profile picture
+        $profilePicURL = "profilePictures/default.png";
+    }
 
     // Check input errors before inserting in database
     if (empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($email_err) && empty($first_name_err) && empty($last_name_err)) {
@@ -169,74 +169,80 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="en" class="h-100">
 
 <head>
-    <title> Trader Snax </title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TraderSnax</title>
+    <link rel="icon" type="image/png" href="./images/TS_LOGO.png" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/trader-joes');
+    </style>
 </head>
 
 <body class="d-flex flex-column h-100">
 
-<?php
-include 'newNavbarLogin.php';
-?>
+    <?php
+    include 'newNavbarLogin.php';
+    ?>
 
-<h1 class="text-center display-1"><b> Trader Snax</b></h1>
-<h3 class="display-6 text-center">Try snacks you've eaten.</h3>
-<h3 class="display-6 text-center">Save those you want to try.</h3>
-<h3 class="display-6 text-center">Tell your friends what's good.</h3>
-<br>
-
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="w-75 container-sm border border-dark border-2 rounded shadow p-4 mb-4 bg-white" enctype="multipart/form-data">
-    <h3 class="text-uppercase text-center"><b> Register for Trader Snax </b></h3>
-    <div class="mb-3 mt-3">
-        <label for="fname" class="form-label">First Name:</label>
-        <input type="text" class="form-control  <?php echo (!empty($first_name_err)) ? 'is-invalid' : ''; ?>" id="fname" placeholder="Enter first name" name="fname" value="<?php echo $first_name; ?>">
-        <div class="invalid-feedback"><?php echo $first_name_err; ?></div>
-    </div>
-    <div class="mb-3 mt-3">
-        <label for="lname" class="form-label">Last Name:</label>
-        <input type="text" class="form-control <?php echo (!empty($last_name_err)) ? 'is-invalid' : ''; ?>" id="lname" placeholder="Enter last name" name="lname" value="<?php echo $last_name; ?>">
-        <div class="invalid-feedback"><?php echo $last_name_err; ?></div>
-    </div>
-
-    <div class="mb-3 mt-3">
-        <label for="uname" class="form-label">Email Address:</label>
-        <input type="text" class="form-control <?php echo (!empty($emailaddr_err)) ? 'is-invalid' : ''; ?>" id="emailaddr" placeholder="Enter email address" name="emailaddr" value="<?php echo $emailaddr; ?>">
-        <div class="invalid-feedback"><?php echo $emailaddr_err; ?></div>
-    </div>
-    <div class="mb-3 mt-3">
-        <label for="username" class="form-label">Username:</label>
-        <input type="text" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" id="username" placeholder="Enter username" name="username" value="<?php echo $username; ?>">
-        <div class="invalid-feedback"><?php echo $username_err; ?></div>
-    </div>
-    <div class="mb-3">
-        <label for="password" class="form-label">Password:</label>
-        <input type="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" id="password" placeholder="Enter password" name="password" value="<?php echo $password; ?>">
-        <div class="invalid-feedback"><?php echo $password_err; ?></div>
-    </div>
-    <div class="mb-3">
-        <label for="confirm_password" class="form-label">Re-enter Password:</label>
-        <input type="password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" id="confirm_password" placeholder="Enter password" name="confirm_password" value="<?php echo $confirm_password; ?>">
-        <div class="invalid-feedback"><?php echo $confirm_password_err; ?></div>
-    </div>
-    <div class="mb-3">
-        <label for="ProfilePicture" class="form-label">Upload Profile Picture:</label>
-        <br>
-        <input type="file" name="ProfilePicture" accept="image/*" id="ProfilePicture" value="" />
-    </div>
-    <div class="text-center w-75 d-grid mx-auto">
-        <button id="submit" type="submit" class="btn btn-outline-info btn-lg">Sign Up </button>
-        <br>
-        <button type="button" class="btn btn-outline-info btn-lg"><a class="nav-link" href="index.php">If Already Registered Log In</a></button>
-    </div>
+    <h1 class="text-center display-1"><b style="font-family: 'Trader Joes', sans-serif;"> Trader Snax</b></h1>
+    <h3 class=" display-6 text-center">Try snacks you've eaten.</h3>
+    <h3 class="display-6 text-center">Save those you want to try.</h3>
+    <h3 class="display-6 text-center">Tell your friends what's good.</h3>
     <br>
-</form>
-<?php
-include 'footer.php';
-?>
+
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="w-75 container-sm border border-dark border-2 rounded shadow p-4 mb-4 bg-white" enctype="multipart/form-data">
+        <h3 class="text-uppercase text-center"><b> Register for Trader Snax </b></h3>
+        <div class="mb-3 mt-3">
+            <label for="fname" class="form-label">First Name:</label>
+            <input type="text" class="form-control  <?php echo (!empty($first_name_err)) ? 'is-invalid' : ''; ?>" id="fname" placeholder="Enter first name" name="fname" value="<?php echo $first_name; ?>">
+            <div class="invalid-feedback"><?php echo $first_name_err; ?></div>
+        </div>
+        <div class="mb-3 mt-3">
+            <label for="lname" class="form-label">Last Name:</label>
+            <input type="text" class="form-control <?php echo (!empty($last_name_err)) ? 'is-invalid' : ''; ?>" id="lname" placeholder="Enter last name" name="lname" value="<?php echo $last_name; ?>">
+            <div class="invalid-feedback"><?php echo $last_name_err; ?></div>
+        </div>
+
+        <div class="mb-3 mt-3">
+            <label for="uname" class="form-label">Email Address:</label>
+            <input type="text" class="form-control <?php echo (!empty($emailaddr_err)) ? 'is-invalid' : ''; ?>" id="emailaddr" placeholder="Enter email address" name="emailaddr" value="<?php echo $emailaddr; ?>">
+            <div class="invalid-feedback"><?php echo $emailaddr_err; ?></div>
+        </div>
+        <div class="mb-3 mt-3">
+            <label for="username" class="form-label">Username:</label>
+            <input type="text" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" id="username" placeholder="Enter username" name="username" value="<?php echo $username; ?>">
+            <div class="invalid-feedback"><?php echo $username_err; ?></div>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password:</label>
+            <input type="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" id="password" placeholder="Enter password" name="password" value="<?php echo $password; ?>">
+            <div class="invalid-feedback"><?php echo $password_err; ?></div>
+        </div>
+        <div class="mb-3">
+            <label for="confirm_password" class="form-label">Re-enter Password:</label>
+            <input type="password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" id="confirm_password" placeholder="Enter password" name="confirm_password" value="<?php echo $confirm_password; ?>">
+            <div class="invalid-feedback"><?php echo $confirm_password_err; ?></div>
+        </div>
+        <div class="mb-3">
+            <label for="ProfilePicture" class="form-label">Upload Profile Picture:</label>
+            <br>
+            <input type="file" name="ProfilePicture" accept="image/*" id="ProfilePicture" value="" />
+        </div>
+        <div class="text-center w-75 d-grid mx-auto">
+            <button id="submit" type="submit" class="btn btn-outline-info btn-lg">Sign Up </button>
+            <br>
+            <button type="button" class="btn btn-outline-info btn-lg"><a class="nav-link" href="index.php">Already Have an Account? Log In</a></button>
+        </div>
+        <br>
+    </form>
+    <?php
+    include 'footer.php';
+    ?>
 </body>
 
 </html>

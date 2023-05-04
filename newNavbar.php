@@ -1,6 +1,7 @@
 <html>
 
 <head lang="en">
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
   <style>
     @import url('https://fonts.cdnfonts.com/css/trader-joes');
   </style>
@@ -19,7 +20,7 @@
         </li>
       </ul>
       <ul class="navbar-nav mx-auto">
-        <form autocomplete="off" class="d-flex">
+        <form autocomplete="off" class="d-flex mb-0">
           <input class="form-control me-2 rounded-pill" id="searchUser" name="searchUser" type="text" placeholder="Search Users" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
         </form>
         <ul class="dropdown-menu" id="searchResults" aria-labelledby="defaultDropdown">
