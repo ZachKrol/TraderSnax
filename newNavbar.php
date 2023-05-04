@@ -5,6 +5,16 @@
   <style>
     @import url('https://fonts.cdnfonts.com/css/trader-joes');
   </style>
+  <script>
+    function getUser(uname){
+        var dbParam = uname;
+
+        const xmlhttp = new XMLHttpRequest();
+        
+        xmlhttp.open("GET", "userPages.php?username=" + dbParam, true);
+        xmlhttp.send();
+    }
+  </script>
 </head>
 
 <body>
@@ -45,7 +55,7 @@
             $result = $link->query($sql);
             while ($record = $result->fetch_assoc()) {
               $username = $record['username'];
-              echo '<li><a class="dropdown-item" href="userPages.php?username=' . $username . '">' . $username . '</a></li>';
+              echo '<li class="dropdown-item"><a onClick="getUser(\'' . $username . '\')">' . $username . '</a></li>';
             }
           }
           ?>
