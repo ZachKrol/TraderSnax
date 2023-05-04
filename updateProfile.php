@@ -10,9 +10,9 @@
 	  die("Connection failed: " . $conn->connect_error);
 	}
 
-	$UID = htmlspecialchars($_POST['userid']);
-	$firstname = htmlspecialchars($_POST['firstname']);
-	$lastname = htmlspecialchars($_POST['lastname']);
+	$UID = htmlspecialchars($_POST['UID']);
+	$firstname = htmlspecialchars($_POST['fname']);
+	$lastname = htmlspecialchars($_POST['lname']);
 	$about = htmlspecialchars($_POST['about']);
     $email = htmlspecialchars($_POST['email']);
     $pfp = htmlspecialchars($_POST['pfp']);
