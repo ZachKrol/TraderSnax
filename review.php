@@ -61,7 +61,6 @@
       }
     }
     if (isset($_REQUEST['submit'])) {
-      echo "si" . $snackName;
       echo $_REQUEST["snackName"];
       echo $_GET['snackName'];
       echo $_POST['snackName'];
@@ -119,7 +118,7 @@
         $param_pictureURL = $pictureURL;
         $param_likes = 0;
         if (mysqli_stmt_execute($stmt)) {
-          echo "Review posted successfully";
+          // echo "Review posted successfully";
           header("location: profile.php");
         }
       }
