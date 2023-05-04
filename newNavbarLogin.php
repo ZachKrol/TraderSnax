@@ -9,7 +9,7 @@ if ($_SESSION["loggedin"]) {
   }
 }
 ?>
-<html>
+<html lang="en">
 
 <head>
   <style>

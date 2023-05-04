@@ -1,17 +1,6 @@
-<?php
-if ($_SESSION["loggedin"]) {
-  $config = parse_ini_file("dbconfig.ini");
-
-  //Database connection
-  $link = new mysqli($config["servername"], $config["username"], $config["password"], $config["dbname"]);
-  if ($link->connect_error) {
-    die("Connection failed: " . $link->connect_error);
-  }
-}
-?>
 <html>
 
-<head>
+<head lang="en">
   <style>
     @import url('https://fonts.cdnfonts.com/css/trader-joes');
   </style>
@@ -29,6 +18,38 @@ if ($_SESSION["loggedin"]) {
           <a class="nav-link" href="index.php"><b class="h4" style="font-family: 'Trader Joes', sans-serif;">Trader Snax</b></a>
         </li>
       </ul>
+      <ul class="navbar-nav mx-auto">
+        <form autocomplete="off" class="d-flex">
+          <input class="form-control me-2 rounded-pill" id="searchUser" name="searchUser" type="text" placeholder="Search Users" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+        </form>
+        <ul class="dropdown-menu" id="searchResults" aria-labelledby="defaultDropdown">
+          <?php
+          session_start();
+          if ($_SESSION["loggedin"]) {
+            $config = parse_ini_file("dbconfig.ini");
+
+            //Database connection
+            $link = new mysqli($config["servername"], $config["username"], $config["password"], $config["dbname"]);
+            if ($link->connect_error) {
+              die("Connection failed: " . $link->connect_error);
+            }
+
+            $currentUser = $_SESSION["username"];
+            $sqlPic = "SELECT * FROM users WHERE username = '$currentUser'";
+            $picResult = $link->query($sqlPic);
+            $picRowResult = $picResult->fetch_assoc();
+            $profilePicture = $picRowResult["profilePicURL"];
+
+            $sql = "select * FROM users";
+            $result = $link->query($sql);
+            while ($record = $result->fetch_assoc()) {
+              $username = $record['username'];
+              echo '<li><a class="dropdown-item" href="profile.php?username=' . $username . '">' . $username . '</a></li>';
+            }
+          }
+          ?>
+        </ul>
+      </ul>
       <ul class="navbar-nav ms-auto">
         <li class="nav-item bg-text-secondary mx-3">
           <a class="nav-link px-3 rounded-4" style="background-color: #065b6c; color: white" href="products.php">View Products</a>
@@ -39,13 +60,22 @@ if ($_SESSION["loggedin"]) {
         <li class="nav-item mx-3">
           <!-- TO DO: INSERT USER NAME AND PHOTO -->
           <a class="navbar-brand" href="profile.php">
-            <img src="profilePictures/default.png" alt="Logo" style="width:40px;" class="rounded-pill">
+            <img src="profilePictures/<?php echo $profilePicture; ?>" alt="Logo" style="width:40px;" class="rounded-pill">
           </a>
         </li>
       </ul>
     </div>
   </nav>
-
+  <script>
+    $(document).ready(function() {
+      $("#searchUser").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#searchResults li").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+  </script>
 </body>
 
 </html>
