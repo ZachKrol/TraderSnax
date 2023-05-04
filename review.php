@@ -49,14 +49,23 @@
   include 'newNavbar.php';
   $snackName = "";
   $pictureURL = "";
+  
   if ($_SESSION["loggedin"]) {
     $username = $_SESSION["username"];
-
-    if ($snackName = $_GET['snackID']) {
-      $snackName = $_GET['snackID'];
-    } else {
-      $snackName = "No Snack Selected";
+    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        if (!empty($_GET["snackID"])) {
+          $snackName = $_GET['snackID'];
+        } else {
+          $snackName = "No Snack Selected";
+        }
+    } 
+    if(isset($_REQUEST['submit'])){
+      echo "si" . $snackName;
+      echo $_REQUEST["snackName"];
+      echo $_GET['snackName'];
+      echo $_POST['snackName'];
     }
+    
     $config = parse_ini_file("dbconfig.ini");
 
     //Database connection
@@ -75,11 +84,11 @@
     $pictureURL = $row["pictureURL"];
     $pictureName = $row["name"];
     $fullURL = "images/" . $pictureURL;
-    if (isset($_POST['submit'])) {
-      $rating = "";
-      $text = $_POST["textBox"];
-
-      if (isset($_POST['rating']) == null) {
+    if (isset($_REQUEST['submit'])) {
+      $rating = $_REQUEST["rating"];
+      $text = $_REQUEST["textBox"];
+      
+      if (isset($_REQUEST['rating']) == null) {
         $rating = 1;
       }
       $sql = "INSERT INTO reviews (username, snackID, rating, reviewText, pictureURL, likes)
@@ -120,8 +129,8 @@
         </div>
       </div>
       <div class="col-md-6">
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="was-validated w-75 container-sm border border-dark border-2 rounded shadow p-4 mb-4 bg-white">
-
+        <form action="" method="get" class="was-validated w-75 container-sm border border-dark border-2 rounded shadow p-4 mb-4 bg-white">
+        <input type='hidden' name='snackID' value='<?php echo "$snackName";?>'/> 
           <h3 class="text-uppercase text-center"><b> Review </b></h3>
           <h3 class="text-uppercase text-center" style="font-family: 'Trader Joes', sans-serif;">
             <b><?php echo $snackName; ?> </b>
