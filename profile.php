@@ -44,6 +44,31 @@ if ($_SESSION["loggedin"]) {
 } else {
   header("location: index.php");
 }
+function processUpload(){
+    if (file_exists($_FILES['ProfilePicture']['tmp_name']) && is_uploaded_file($_FILES['ProfilePicture']['tmp_name'])) {
+        $target_dir = "profilePictures/";
+        $target_file = $target_dir . basename($_FILES["ProfilePicture"]["name"]);
+        $filetype = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+        $uploadOk = 1;
+        $check = getimagesize($_FILES["ProfilePicture"]["tmp_name"]);
+        if ($check !== false) {
+            $uploadOk = 1;
+        } else {
+            $uploadOk = 0;
+        }
+        if ($uploadOk == 0) {
+            echo "Sorry, your file was not uploaded.";
+        } else {
+            if (move_uploaded_file($_FILES["ProfilePicture"]["tmp_name"], $target_dir . $username .  '.' . $filetype)) {
+                echo "The file " . htmlspecialchars(basename($_FILES["ProfilePicture"]["name"])) . " has been uploaded.";
+            } else {
+                echo "Sorry, there was an error uploading your file.";
+            }
+        }
+        $profilePicURL = $username .  '.' . $filetype;
+    }
+    return $profilePicURL;
+}
 
 ?>
 <!DOCTYPE html>
@@ -101,7 +126,7 @@ if ($_SESSION["loggedin"]) {
             <div style='display:none;'><input type='radio' name='UID' id='UID' value="<?php echo $uid ?>" checked></div>
             <label for="ProfilePicture" class="form-label">Edit Profile Picture:</label>
             <br>
-            <input type="file" name="ProfilePicture" accept="image/*" id="ProfilePicture" value="<?php echo $pfp ?>" />
+            <input type="file" name="ProfilePicture" accept="image/*" id="ProfilePicture" value="<?php echo processUpload() ?>" />
 
             <div class="form-floating w-75 mx-auto">
               <input type="text" class="form-control" id="fname" name="fname" value="<?php echo $fname ?>" placeholder="<?php echo $fname ?>" required>
