@@ -98,8 +98,8 @@ if ($_SESSION["loggedin"]) {
           </div>
           <br>
 	   <div class="form-floating w-75 mx-auto">
-              <input type="text" class="form-control" id="email" name="email" value="" placeholder="Enter Email Addr" required>
-              <label for="sname" class="form-label"> Last Name </label>
+              <input type="text" class="form-control" id="email" name="email" value="" placeholder="Enter Email Address" required>
+              <label for="sname" class="form-label"> Email Address </label>
               <div class="valid-feedback">Valid.</div>
               <div class="invalid-feedback">Please enter your email address.</div>
           </div>
@@ -134,7 +134,7 @@ if ($_SESSION["loggedin"]) {
                     <div style="width:150px;height:150px;">
                     <img src=<?php echo $profilePicUrl;?> style="width:150px;height:150px;object-fit:cover;z-index:100" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2">
                     </div>
-                  <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;">
+                  <button onClick='editProfile(<?php echo $uid, $fname, $lname, $about, $email; ?>)' type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark" data-bs-toggle='modal' data-bs-target='#editModal' style="z-index: 1;">
                     Edit profile
                   </button>
                   <input name="submit" type="submit" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;" value="Log out">
