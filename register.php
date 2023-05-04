@@ -123,10 +123,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "Sorry, there was an error uploading your file.";
             }
         }
-        $profilePicURL = $target_dir . $username .  '.' . $filetype;
+        $profilePicURL = $username .  '.' . $filetype;
     } else {
         // user hasn't uploaded anything set to default profile picture
-        $profilePicURL = "profilePictures/default.png";
+        $profilePicURL = "default.png";
     }
 
     // Check input errors before inserting in database

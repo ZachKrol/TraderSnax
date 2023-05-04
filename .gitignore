@@ -1,5 +1,6 @@
 .vscode/settings.json
 TradersSnax Connection.session.sql
+TradersSnax_Connection.session.sql
 mysql.log.data.php
 notes.txt
 dbconfig.ini
