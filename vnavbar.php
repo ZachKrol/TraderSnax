@@ -25,7 +25,7 @@ $link->close();
         <a class="nav-link" href="products.php">Products</a>
       </li>
       <form class="d-flex">
-        <input class="form-control me-2 rounded-pill" id="searchUser" name="searchUser" type="text" placeholder="Search Users">
+        <input class="form-control me-2 rounded-pill" id="searchUser" name="searchUser" type="text" placeholder="Search Users" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
       </form>
       <ul class="dropdown-menu" id="searchResults" aria-labelledby="defaultDropdown">
       <?php
