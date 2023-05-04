@@ -119,7 +119,8 @@
         $param_likes = 0;
         if (mysqli_stmt_execute($stmt)) {
           // echo "Review posted successfully";
-          header("location: profile.php");
+          //header("location: profile.php");
+          echo "<script>window.location.href='profile.php';</script>";
         }
       }
     }
