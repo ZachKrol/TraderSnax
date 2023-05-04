@@ -1,7 +1,7 @@
 #!/usr/local/bin/php
 <?php
 	// Include config file
-	$config = parse_ini_file("../../database/dbconfig.ini");
+	$config = parse_ini_file("dbconfig.ini");
 
 	//Database connection
 	$conn = new mysqli($config["servername"], $config["username"], $config["password"], $config["dbname"]);
