@@ -83,6 +83,7 @@
     $row = $result->fetch_assoc();
     $pictureURL = $row["pictureURL"];
     $pictureName = $row["name"];
+    $sumRating = $row["rating"];
     $fullURL = "images/" . $pictureURL;
     $sumRating = $row["rating"];
 
