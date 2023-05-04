@@ -98,34 +98,34 @@ if ($_SESSION["loggedin"]) {
         <div class="modal-body">
           <form class="was-validated border-dark" novalidate action='updateProfile.php' method='post'>
             <br>
-            <div style='display:none;'><input type='radio' name='UID' id='UID' value="" checked></div>
+            <div style='display:none;'><input type='radio' name='UID' id='UID' value="<?php echo $uid ?>" checked></div>
             <label for="ProfilePicture" class="form-label">Edit Profile Picture:</label>
             <br>
-            <input type="file" name="ProfilePicture" accept="image/*" id="ProfilePicture" value="" />
+            <input type="file" name="ProfilePicture" accept="image/*" id="ProfilePicture" value="<?php echo $pfp ?>" />
 
             <div class="form-floating w-75 mx-auto">
-              <input type="text" class="form-control" id="fname" name="fname" value="" placeholder="Enter First Name" required>
+              <input type="text" class="form-control" id="fname" name="fname" value="<?php echo $fname ?>" placeholder="<?php echo $fname ?>" required>
               <label for="sname" class="form-label"> First Name </label>
               <div class="valid-feedback">Valid.</div>
               <div class="invalid-feedback">Please enter first name.</div>
             </div>
             <br>
             <div class="form-floating w-75 mx-auto">
-              <input type="text" class="form-control" id="lname" name="lname" value="" placeholder="Enter Last Name" required>
+              <input type="text" class="form-control" id="lname" name="lname" value="<?php echo $lname ?>" placeholder="<?php echo $lname ?>" required>
               <label for="sname" class="form-label"> Last Name </label>
               <div class="valid-feedback">Valid.</div>
               <div class="invalid-feedback">Please enter the snack name.</div>
             </div>
             <br>
             <div class="form-floating w-75 mx-auto">
-              <input type="text" class="form-control" id="email" name="email" value="" placeholder="Enter Email Address" required>
+              <input type="text" class="form-control" id="email" name="email" value="<?php echo $email ?>" placeholder="<?php echo $email ?>" required>
               <label for="sname" class="form-label"> Email Address </label>
               <div class="valid-feedback">Valid.</div>
               <div class="invalid-feedback">Please enter your email address.</div>
             </div>
             <br>
             <div class="form-floating w-75 mx-auto form-group">
-              <textarea class="form-control" id="about" name="about" placeholder="About me" value="" required></textarea>
+              <textarea class="form-control" id="about" name="about" placeholder="<?php echo $aboutme ?>" value="<?php echo $aboutme ?>" required></textarea>
               <label for="sdesc" class="form-label"> About Me </label>
               <div class="valid-feedback">Valid.</div>
               <div class="invalid-feedback">Please enter the short description about yourself.</div>
