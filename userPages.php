@@ -17,8 +17,8 @@ if ($_SESSION["loggedin"]) {
   if ($link->connect_error) {
     die("Connection failed: " . $link->connect_error);
   }
-  $actualUserID = $_SESSION["userID"];
-  $username = $_GET['username'];
+  $actualUserID = $_SESSION["id"];
+  $username = $_GET["username"];
   $sql = "SELECT userID, fname, lname, email, aboutme, email, following, followers, reviews, profilePicUrl FROM users WHERE username = '$username'";
 
   $result = $link->query($sql);
@@ -34,9 +34,9 @@ if ($_SESSION["loggedin"]) {
   $uid = $row["userID"];
   $profilePicUrl = $row["profilePicUrl"];
 
-  $sql1 = "SELECT COUNT(*) FROM following WHERE userid = $actualUserID AND followingid = $uid;";
-  $result1 = mysqli_query($link, $sql1);
-  $count = mysqli_fetch_array($result1)[0];
+  $sql = "SELECT COUNT(*) FROM following WHERE userid = $actualUserID AND followingid = $uid;";
+  $result = mysqli_query($link, $sql);
+  $count = mysqli_fetch_array($result)[0];
 
 
   $sql = "SELECT snackID, pictureURL FROM reviews WHERE username = '$username'";
@@ -58,30 +58,7 @@ if ($_SESSION["loggedin"]) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>  
-  <script>
-    const followBtn = document.getElementById('followBtn');
-    let isFollowing = SELECT COUNT(*) FROM following WHERE userid = $actualUserID AND followingid = $uid;
-    followBtn.addEventListener('click', function() {
-    if (isFollowing > 0) {
-        followBtn.innerText = 'Following';
-        followBtn.classList.remove('btn-primary');
-        followBtn.classList.add('btn-secondary');
-        <?php 
-            $sql2 = "INSERT INTO following (userid, followingid) VALUES (  $actualUserID, $uid)";
-            $result2 = mysqli_query($conn, $sql);
-        ?>
-    } else {
-        followBtn.innerText = 'Follow';
-        followBtn.classList.remove('btn-secondary');
-        followBtn.classList.add('btn-primary');
-       <?php
-            $sql = "DELETE FROM following WHERE userid = $actualUserID";
-            $result = $conn->query($sql);
-       ?>
-    }
-    });
-
-  </script>  
+  
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -98,16 +75,8 @@ if ($_SESSION["loggedin"]) {
                     <div style="width:150px;height:150px;">
                     <img src=<?php echo $profilePicUrl;?> style="width:150px;height:150px;object-fit:cover;z-index:100" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2">
                     </div>
-                    <?php
-                        if ($count > 0) {
-                            // User is following the page
-                            echo '<button class="btn btn-secondary">Following</button>';
-                          } else {
-                            // User is not following the page
-                            echo '<button class="btn btn-primary">Follow</button>';
-                          }
-                          
-                    ?>
+                    <button class="btn btn-primary">Follow</button>
+                   
                 </div>
                 <div class="ms-3" style="margin-top: 130px;">
                   <h5><?php echo $fullName; ?></h5>
