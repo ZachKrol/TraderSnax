@@ -79,7 +79,7 @@
     $result = $link->query($sql);
 
     if ($result->num_rows < 1) {
-      //header("location: profile.php");
+      header("location: profile.php");
     }
     $row = $result->fetch_assoc();
     $pictureURL = $row["pictureURL"];
@@ -120,7 +120,7 @@
         $param_likes = 0;
         if (mysqli_stmt_execute($stmt)) {
           echo "Review posted successfully";
-          //header("location: profile.php");
+          header("location: profile.php");
         }
       }
     }
