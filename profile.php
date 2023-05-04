@@ -39,6 +39,16 @@ if ($_SESSION["loggedin"]) {
     $profilePicUrl = $profilePicUrl . $row["profilePicUrl"];
   }
 
+  //getting number of following
+  $sql = "SELECT COUNT(*) as num_following FROM following WHERE followingid = $userid";
+  $result = $link->query($sql);
+  $row = $result->fetch_assoc();
+  $following = $row["num_following"];
+  //number of followers
+  $sql = "SELECT COUNT(*) as num_followers FROM following WHERE userid = $userid";
+  $result = $link->query($sql);
+  $row = $result->fetch_assoc();
+  $followers = $row["num_followers"];
 
   $sql = "SELECT snackID, pictureURL FROM reviews WHERE username = '$username'";
   $result = $link->query($sql);
