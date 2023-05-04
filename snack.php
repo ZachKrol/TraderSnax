@@ -129,13 +129,21 @@
       <?php
       $sqlReviews = "SELECT username, rating, reviewText FROM reviews WHERE snackID = '$snackID'";
       $reviewsResult = $link->query($sqlReviews);
-      //echo $link->error;
 
       if ($reviewsResult->num_rows > 0) {
         while ($review = $reviewsResult->fetch_assoc()) {
           $stars = '';
           $tempRating = $review["rating"];
           $newRating = round($tempRating);
+
+
+          $reviewersUsername = $review["username"];
+
+          $sqlGetPic = "SELECT * FROM users WHERE username = '$reviewersUsername'";
+          $getPicResult = $link->query($sqlGetPic);
+          $reviewersPic = $getPicResult->fetch_assoc();
+          $reviewersURL = $reviewersPic["profilePicURL"];
+          echo $reviewersURL;
 
           // star fill
           if ($newRating == 1) {
@@ -194,8 +202,8 @@
             <div class="w-85 container-sm border border-dark border-2 rounded shadow p-4 mb-4 bg-white">
               <div class="row">
                 <div class="col-auto d-flex align-items-center">
-                  <img style="width:40px;" class="rounded-pill" src="./profilePictures/default.png" alt="profile picture">
-                  <p class="my-auto ps-3">' . $review["username"] . '</p>
+                  <img style="width:40px;" class="rounded-pill" src="./profilePictures/' . $reviewersURL . '" alt="profile picture">
+                  <p class="my-auto ps-3">' . $reviewersUsername . '</p>
                 </div>
               </div>
               <div class="row mt-2">

@@ -32,7 +32,16 @@ if ($_SESSION["loggedin"]) {
   $followers = $row["followers"];
   $email = $row["email"];
   $uid = $row["userID"];
-  $profilePicUrl = $row["profilePicUrl"];
+  $profilePicUrl = "profilePictures/";
+  if (empty($row["profilePicUrl"])) {
+    $profilePicUrl = $profilePicUrl . "default.png";
+  } else {
+    $profilePicUrl = $profilePicUrl . $row["profilePicUrl"];
+  }
+
+
+
+
 
 
   $sql = "SELECT snackID, pictureURL FROM reviews WHERE username = '$username'";
@@ -53,9 +62,9 @@ if ($_SESSION["loggedin"]) {
   </style>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>  
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script>
-    function editProfile(uid, firstname, lastname, about, email, pfp){
+    function editProfile(uid, firstname, lastname, about, email, pfp) {
       document.getElementById("UID").value = uid;
       document.getElementById("fname").value = firstname;
       document.getElementById("lname").value = lastname;
@@ -63,65 +72,65 @@ if ($_SESSION["loggedin"]) {
       document.getElementById("email").value = email;
       document.getElementById("pfp").value = pfp;
     };
-  </script>  
+  </script>
 </head>
 
 <body class="d-flex flex-column h-100">
 
-<div class="modal fade" id="editModal">
+  <div class="modal fade" id="editModal">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-      <div class="modal-header">
+        <div class="modal-header">
           <h4 class="modal-title">Edit Snack</h4>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-        <form class="was-validated border-dark" novalidate action='updateProfile.php' method='post'>
-          <br>
-          <div style='display:none;'><input type='radio' name='UID' id='UID' value="" checked></div>
-	    <label for="ProfilePicture" class="form-label">Edit Profile Picture:</label>
-        <br>
-        <input type="file" name="ProfilePicture" accept="image/*" id="ProfilePicture" value="" />
+          <form class="was-validated border-dark" novalidate action='updateProfile.php' method='post'>
+            <br>
+            <div style='display:none;'><input type='radio' name='UID' id='UID' value="" checked></div>
+            <label for="ProfilePicture" class="form-label">Edit Profile Picture:</label>
+            <br>
+            <input type="file" name="ProfilePicture" accept="image/*" id="ProfilePicture" value="" />
 
-          <div class="form-floating w-75 mx-auto">
+            <div class="form-floating w-75 mx-auto">
               <input type="text" class="form-control" id="fname" name="fname" value="" placeholder="Enter First Name" required>
               <label for="sname" class="form-label"> First Name </label>
               <div class="valid-feedback">Valid.</div>
               <div class="invalid-feedback">Please enter first name.</div>
-          </div>
-          <br>
-	    <div class="form-floating w-75 mx-auto">
+            </div>
+            <br>
+            <div class="form-floating w-75 mx-auto">
               <input type="text" class="form-control" id="lname" name="lname" value="" placeholder="Enter Last Name" required>
               <label for="sname" class="form-label"> Last Name </label>
               <div class="valid-feedback">Valid.</div>
               <div class="invalid-feedback">Please enter the snack name.</div>
-          </div>
-          <br>
-	   <div class="form-floating w-75 mx-auto">
+            </div>
+            <br>
+            <div class="form-floating w-75 mx-auto">
               <input type="text" class="form-control" id="email" name="email" value="" placeholder="Enter Email Address" required>
               <label for="sname" class="form-label"> Email Address </label>
               <div class="valid-feedback">Valid.</div>
               <div class="invalid-feedback">Please enter your email address.</div>
-          </div>
-          <br>
-          <div class="form-floating w-75 mx-auto form-group">
+            </div>
+            <br>
+            <div class="form-floating w-75 mx-auto form-group">
               <textarea class="form-control" id="about" name="about" placeholder="About me" value="" required></textarea>
               <label for="sdesc" class="form-label"> About Me </label>
               <div class="valid-feedback">Valid.</div>
               <div class="invalid-feedback">Please enter the short description about yourself.</div>
-          </div>
-          <br>
-      </div>
-      <div class="modal-footer">
-            <button type="reset" class="btn btn-outline-info mx-auto w-50">Reset</button>
-            <button type="submit" class="btn btn-outline-info mx-auto w-50" id="submitBtn" data-bs-dismiss="modal">Confirm Changes</button>
-          </div>
+            </div>
+            <br>
+        </div>
+        <div class="modal-footer">
+          <button type="reset" class="btn btn-outline-info mx-auto w-50">Reset</button>
+          <button type="submit" class="btn btn-outline-info mx-auto w-50" id="submitBtn" data-bs-dismiss="modal">Confirm Changes</button>
+        </div>
 
-          <br>
-      </form>
+        <br>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
     <section class="h-100 gradient-custom-2">
@@ -131,9 +140,9 @@ if ($_SESSION["loggedin"]) {
             <div class="card">
               <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
                 <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
-                    <div style="width:150px;height:150px;">
-                    <img src=<?php echo $profilePicUrl;?> style="width:150px;height:150px;object-fit:cover;z-index:100" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2">
-                    </div>
+                  <div style="width:150px;height:150px;">
+                    <img src=<?php echo $profilePicUrl; ?> style="width:150px;height:150px;object-fit:cover;z-index:100" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2">
+                  </div>
                   <button onClick='editProfile(<?php echo $uid, $fname, $lname, $about, $email; ?>)' type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark" data-bs-toggle='modal' data-bs-target='#editModal' style="z-index: 1;">
                     Edit profile
                   </button>

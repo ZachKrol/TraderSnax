@@ -49,23 +49,23 @@
   include 'newNavbar.php';
   $snackName = "";
   $pictureURL = "";
-  
+
   if ($_SESSION["loggedin"]) {
     $username = $_SESSION["username"];
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-        if (!empty($_GET["snackID"])) {
-          $snackName = $_GET['snackID'];
-        } else {
-          $snackName = "No Snack Selected";
-        }
-    } 
-    if(isset($_REQUEST['submit'])){
+      if (!empty($_GET["snackID"])) {
+        $snackName = $_GET['snackID'];
+      } else {
+        $snackName = "No Snack Selected";
+      }
+    }
+    if (isset($_REQUEST['submit'])) {
       echo "si" . $snackName;
       echo $_REQUEST["snackName"];
       echo $_GET['snackName'];
       echo $_POST['snackName'];
     }
-    
+
     $config = parse_ini_file("dbconfig.ini");
 
     //Database connection
@@ -74,20 +74,26 @@
     if ($link->connect_error) {
       die("Connection failed: " . $link->connect_error);
     }
-    $sql = "SELECT pictureURL FROM snacks WHERE snackID = '$snackName'";
+    $sql = "SELECT pictureURL, rating FROM snacks WHERE snackID = '$snackName'";
     $result = $link->query($sql);
 
     if ($result->num_rows < 1) {
-      header("location: profile.php");
+      //header("location: profile.php");
     }
     $row = $result->fetch_assoc();
     $pictureURL = $row["pictureURL"];
     $pictureName = $row["name"];
     $fullURL = "images/" . $pictureURL;
+    $sumRating = $row["rating"];
+
     if (isset($_REQUEST['submit'])) {
       $rating = $_REQUEST["rating"];
       $text = $_REQUEST["textBox"];
-      
+      $sumRating = $sumRating + $rating;
+
+      $sqlRating = "UPDATE snacks SET rating='$sumRating' WHERE snackID = $snackName";
+      $tempRating = $link->query($sqlRating);
+
       if (isset($_REQUEST['rating']) == null) {
         $rating = 1;
       }
@@ -113,7 +119,7 @@
         $param_likes = 0;
         if (mysqli_stmt_execute($stmt)) {
           echo "Review posted successfully";
-          header("location: profile.php");
+          //header("location: profile.php");
         }
       }
     }
@@ -130,7 +136,7 @@
       </div>
       <div class="col-md-6">
         <form action="" method="get" class="was-validated w-75 container-sm border border-dark border-2 rounded shadow p-4 mb-4 bg-white">
-        <input type='hidden' name='snackID' value='<?php echo "$snackName";?>'/> 
+          <input type='hidden' name='snackID' value='<?php echo "$snackName"; ?>' />
           <h3 class="text-uppercase text-center"><b> Review </b></h3>
           <h3 class="text-uppercase text-center" style="font-family: 'Trader Joes', sans-serif;">
             <b><?php echo $snackName; ?> </b>
