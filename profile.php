@@ -19,15 +19,19 @@ if ($_SESSION["loggedin"]) {
   }
 
   $username = $_SESSION["username"];
-  $sql = "SELECT fname, lname, email, aboutme, following, followers, reviews, profilePicUrl FROM users WHERE username = '$username'";
+  $sql = "SELECT userID, fname, lname, email, aboutme, email, following, followers, reviews FROM users WHERE username = '$username'";
 
   $result = $link->query($sql);
   $row = $result->fetch_assoc();
   $fullName = $row["fname"] . " " . $row["lname"];
+  $fname = $row["fname"];
+  $lname = $row["lname"];
   $aboutme = $row["aboutme"];
   $reviews = $row["reviews"];
   $following = $row["following"];
   $followers = $row["followers"];
+  $email = $row["email"];
+  $uid = $row["userID"];
   $profilePicUrl = $row["profilePicUrl"];
 
 
@@ -49,11 +53,76 @@ if ($_SESSION["loggedin"]) {
   </style>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>  
+  <script>
+    function editProfile(uid, firstname, lastname, about, email, pfp){
+      document.getElementById("UID").value = uid;
+      document.getElementById("fname").value = firstname;
+      document.getElementById("lname").value = lastname;
+      document.getElementById("about").value = about;
+      document.getElementById("email").value = email;
+      document.getElementById("pfp").value = pfp;
+    };
+  </script>  
 </head>
 
 <body class="d-flex flex-column h-100">
+
+<div class="modal fade" id="editModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+      <div class="modal-header">
+          <h4 class="modal-title">Edit Snack</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+        <form class="was-validated border-dark" novalidate action='updateProfile.php' method='post'>
+          <br>
+          <div style='display:none;'><input type='radio' name='UID' id='UID' value="" checked></div>
+	    <label for="ProfilePicture" class="form-label">Edit Profile Picture:</label>
+        <br>
+        <input type="file" name="ProfilePicture" accept="image/*" id="ProfilePicture" value="" />
+
+          <div class="form-floating w-75 mx-auto">
+              <input type="text" class="form-control" id="fname" name="fname" value="" placeholder="Enter First Name" required>
+              <label for="sname" class="form-label"> First Name </label>
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please enter first name.</div>
+          </div>
+          <br>
+	    <div class="form-floating w-75 mx-auto">
+              <input type="text" class="form-control" id="lname" name="lname" value="" placeholder="Enter Last Name" required>
+              <label for="sname" class="form-label"> Last Name </label>
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please enter the snack name.</div>
+          </div>
+          <br>
+	   <div class="form-floating w-75 mx-auto">
+              <input type="text" class="form-control" id="email" name="email" value="" placeholder="Enter Email Addr" required>
+              <label for="sname" class="form-label"> Last Name </label>
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please enter your email address.</div>
+          </div>
+          <br>
+          <div class="form-floating w-75 mx-auto form-group">
+              <textarea class="form-control" id="about" name="about" placeholder="About me" value="" required></textarea>
+              <label for="sdesc" class="form-label"> About Me </label>
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please enter the short description about yourself.</div>
+          </div>
+          <br>
+      </div>
+      <div class="modal-footer">
+            <button type="reset" class="btn btn-outline-info mx-auto w-50">Reset</button>
+            <button type="submit" class="btn btn-outline-info mx-auto w-50" id="submitBtn" data-bs-dismiss="modal">Confirm Changes</button>
+          </div>
+
+          <br>
+      </form>
+    </div>
+  </div>
+</div>
+
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
     <section class="h-100 gradient-custom-2">
       <div class="container py-5 h-100">
