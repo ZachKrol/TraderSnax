@@ -23,7 +23,7 @@
         <form autocomplete="off" class="d-flex mb-0">
           <input class="form-control me-2 rounded-pill" id="searchUser" name="searchUser" type="text" placeholder="Search Users" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
         </form>
-        <ul class="dropdown-menu" id="searchResults" aria-labelledby="defaultDropdown">
+        <ul class="dropdown-menu" id="searchResults" name="searchResults" aria-labelledby="defaultDropdown">
           <?php
           session_start();
           if ($_SESSION["loggedin"]) {
@@ -45,7 +45,7 @@
             $result = $link->query($sql);
             while ($record = $result->fetch_assoc()) {
               $username = $record['username'];
-              echo '<li><a class="dropdown-item" href="profile.php?username=' . $username . '">' . $username . '</a></li>';
+              echo '<li><a class="dropdown-item" href="userPages.php?username=' . $username . '">' . $username . '</a></li>';
             }
           }
           ?>
