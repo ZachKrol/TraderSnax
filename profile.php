@@ -19,7 +19,7 @@ if ($_SESSION["loggedin"]) {
   }
 
   $username = $_SESSION["username"];
-  $sql = "SELECT userID, fname, lname, email, aboutme, email, following, followers, reviews FROM users WHERE username = '$username'";
+  $sql = "SELECT userID, fname, lname, email, aboutme, email, following, followers, reviews, profilePicUrl FROM users WHERE username = '$username'";
 
   $result = $link->query($sql);
   $row = $result->fetch_assoc();
@@ -132,7 +132,7 @@ if ($_SESSION["loggedin"]) {
               <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
                 <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
                     <div style="width:150px;height:150px;">
-                    <img src=<?php echo $profilePicUrl;?> style="width:150px;height:150px;object-fit:cover;z-index:1" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2">
+                    <img src=<?php echo $profilePicUrl;?> style="width:150px;height:150px;object-fit:cover;z-index:100" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2">
                     </div>
                   <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;">
                     Edit profile
