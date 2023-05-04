@@ -19,7 +19,7 @@ if ($_SESSION["loggedin"]) {
   }
 
   $username = $_SESSION["username"];
-  $sql = "SELECT fname, lname, email, aboutme, following, followers, reviews FROM users WHERE username = '$username'";
+  $sql = "SELECT fname, lname, email, aboutme, following, followers, reviews, profilePicUrl FROM users WHERE username = '$username'";
 
   $result = $link->query($sql);
   $row = $result->fetch_assoc();
@@ -28,6 +28,7 @@ if ($_SESSION["loggedin"]) {
   $reviews = $row["reviews"];
   $following = $row["following"];
   $followers = $row["followers"];
+  $profilePicUrl = $row["profilePicUrl"];
 
 
   $sql = "SELECT snackID, pictureURL FROM reviews WHERE username = '$username'";
@@ -61,7 +62,7 @@ if ($_SESSION["loggedin"]) {
             <div class="card">
               <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
                 <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
-                  <img src="profilePictures/default.png" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
+                  <img src=<?php echo $profilePicUrl;?> alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
                   <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;">
                     Edit profile
                   </button>
