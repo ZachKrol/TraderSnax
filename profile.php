@@ -20,7 +20,6 @@ if ($_SESSION["loggedin"]) {
 
   $username = $_SESSION["username"];
   $sql = "SELECT userID, fname, lname, email, aboutme, email, following, followers, reviews, profilePicUrl FROM users WHERE username = '$username'";
-
   $result = $link->query($sql);
   $row = $result->fetch_assoc();
   $fullName = $row["fname"] . " " . $row["lname"];
@@ -28,8 +27,6 @@ if ($_SESSION["loggedin"]) {
   $lname = $row["lname"];
   $aboutme = $row["aboutme"];
   $reviews = $row["reviews"];
-  $following = $row["following"];
-  $followers = $row["followers"];
   $email = $row["email"];
   $uid = $row["userID"];
   $profilePicUrl = "profilePictures/";
@@ -38,7 +35,17 @@ if ($_SESSION["loggedin"]) {
   } else {
     $profilePicUrl = $profilePicUrl . $row["profilePicUrl"];
   }
-
+  //getting number of following
+  $sql = "SELECT COUNT(*) as num_following FROM following WHERE followingid = $userid";
+  $result = $link->query($sql);
+  $row = $result->fetch_assoc();
+  $following = $row["num_following"];
+  //number of followers
+  $sql = "SELECT COUNT(*) as num_followers FROM following WHERE userid = $userid";
+  $result = $link->query($sql);
+  $row = $result->fetch_assoc();
+  $followers = $row["num_followers"];
+  
   $sql = "SELECT snackID, pictureURL FROM reviews WHERE username = '$username'";
   $result = $link->query($sql);
 } else {
@@ -193,15 +200,49 @@ function processUpload(){
                 <div class="d-flex justify-content-end text-center py-1">
                   <div>
                     <p class="mb-1 h5"><?php echo $reviews; ?></p>
-                    <p class="small text-muted mb-0">Reviews</p>
+                    <p class="small text-muted mb-0" >Reviews</p>
                   </div>
                   <div class="px-3">
                     <p class="mb-1 h5"><?php echo $followers; ?></p>
-                    <p class="small text-muted mb-0">Followers</p>
+                    <p class="small text-muted mb-0" data-bs-toggle="dropdown">Followers</p>
+                    <?php
+                        $sql = $sql = "SELECT u.username
+                                      FROM users u
+                                      JOIN following f ON u.userid = f.userid
+                                      WHERE f.userid = '$userid'";
+                        $result = $link->query($sql);
+                       if ($result->num_rows > 0) {
+                        while ($record = $result->fetch_assoc()) {
+                          $username = $record['username'];
+                          echo '<li class="dropdown-item"> . $username . </li>';
+                        }
+                       }
+                       else{
+                         echo "No Followers.";
+                       }
+                      ?>
                   </div>
                   <div>
                     <p class="mb-1 h5"><?php echo $following; ?></p>
-                    <p class="small text-muted mb-0">Following</p>
+                    <p class="small text-muted mb-0" data-bs-toggle="dropdown">Following</p>
+                     <ul class="dropdown-menu">
+                      <?php
+                        $sql = $sql = "SELECT u.username
+                                      FROM users u
+                                      JOIN following f ON u.userid = f.followingid
+                                      WHERE f.followingid = '$userid'";
+                        $result = $link->query($sql);
+                       if ($result->num_rows > 0) {
+                        while ($record = $result->fetch_assoc()) {
+                          $username = $record['username'];
+                          echo '<li class="dropdown-item"> . $username . </li>';
+                        }
+                       }
+                       else{
+                         echo "Not Following Anyone.";
+                       }
+                      ?>
+                    </ul>  
                   </div>
                 </div>
               </div>
