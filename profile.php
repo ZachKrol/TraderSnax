@@ -183,7 +183,7 @@ if ($_SESSION["loggedin"]) {
                       $item .= '<div class="row g-2">';
                     }
                     //Need to add reviewURL soon
-                    $fullURL = "snackPictures/" . $pictureURL;
+                    $fullURL = "images/" . $pictureURL;
                     $item .= '<div style="text-align:center;"class="col mb-2">
                     <a style="text-decoration: none; color: inherit;" href="review.php">
                     <img style = "object-fit: cover; max-height: 225px;"src="' .
