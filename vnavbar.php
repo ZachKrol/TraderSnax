@@ -31,7 +31,7 @@ $link->close();
       <?php
         while($record = $result->fetch_assoc()){
           $username = $record['username'];
-          echo '<li><a class="dropdown-item" href="profile.php?username=' . $username . '">' . $username . '</a></li>';
+          echo '<li><a class="dropdown-item" href="userPages.php?username=' . $username . '">' . $username . '</a></li>';
 
         }
       ?>
