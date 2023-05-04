@@ -15,9 +15,9 @@ $firstname = htmlspecialchars($_POST['fname']);
 $lastname = htmlspecialchars($_POST['lname']);
 $about = htmlspecialchars($_POST['about']);
 $email = htmlspecialchars($_POST['email']);
-$pfp = htmlspecialchars($_POST['pfp']);
+$pfp = htmlspecialchars($_POST['ProfilePicture']);
 
-echo $_POST['pfp'];
+echo $_POST['ProfilePicture'];
 
 $stmt = $conn->prepare("UPDATE users SET fname=?, lname=?, aboutme=?, email=?, profilePicURL=? WHERE userID=?");
 $stmt->bind_param("sssssi", $firstname, $lastname, $about, $email, $pfp, $UID);
