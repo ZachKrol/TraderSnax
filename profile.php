@@ -39,6 +39,7 @@ if ($_SESSION["loggedin"]) {
     $profilePicUrl = $profilePicUrl . $row["profilePicUrl"];
   }
 
+
   $sql = "SELECT snackID, pictureURL FROM reviews WHERE username = '$username'";
   $result = $link->query($sql);
 } else {
