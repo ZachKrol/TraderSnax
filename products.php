@@ -1,4 +1,14 @@
 #!/usr/local/bin/php
+<?php
+session_start();
+// Include config file
+if (isset($_POST['submit'])) {
+  $_SESSION["loggedin"] = false;
+  $_SESSION["id"] = NULL;
+  $_SESSION["username"] = NULL;
+  header("location: index.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en" class="h-100">
 
