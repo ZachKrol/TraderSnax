@@ -18,7 +18,9 @@ if ($_SESSION["loggedin"]) {
     die("Connection failed: " . $link->connect_error);
   }
 
-  $username = $_SESSION["username"];
+  $actualUserID = $_SESSION["id"];
+  $username = $_GET["username"];
+
   $sql = "SELECT userID, fname, lname, email, aboutme, email, following, followers, reviews, profilePicUrl FROM users WHERE username = '$username'";
 
   $result = $link->query($sql);
