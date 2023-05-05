@@ -74,7 +74,7 @@
     if ($link->connect_error) {
       die("Connection failed: " . $link->connect_error);
     }
-    $sql = "SELECT pictureURL, rating FROM snacks WHERE snackID = '$snackName'";
+    $sql = "SELECT pictureURL, rating, ID FROM snacks WHERE snackID = '$snackName'";
     $result = $link->query($sql);
 
     if ($result->num_rows < 1) {
@@ -84,15 +84,14 @@
     $pictureURL = $row["pictureURL"];
     $pictureName = $row["name"];
     $sumRating = $row["rating"];
+    $tempID = $row["ID"];
     $fullURL = "images/" . $pictureURL;
-    $sumRating = $row["rating"];
 
     if (isset($_REQUEST['submit'])) {
       $rating = $_REQUEST["rating"];
       $text = $_REQUEST["textBox"];
       $sumRating = $sumRating + $rating;
-
-      $sqlRating = "UPDATE snacks SET rating='$sumRating' WHERE snackID = $snackName";
+      $sqlRating = "UPDATE snacks SET rating='$sumRating' WHERE ID = '$tempID'";
       $tempRating = $link->query($sqlRating);
 
       if (isset($_REQUEST['rating']) == null) {
