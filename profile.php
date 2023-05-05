@@ -55,34 +55,6 @@ if ($_SESSION["loggedin"]) {
 } else {
   header("location: index.php");
 }
-function processUpload()
-{
-  if (file_exists($_FILES['ProfilePicture']['tmp_name']) && is_uploaded_file($_FILES['ProfilePicture']['tmp_name'])) {
-    $username = $_SESSION["username"];
-    $target_dir = "profilePictures/";
-    $target_file = $target_dir . basename($_FILES["ProfilePicture"]["name"]);
-    $filetype = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-    $uploadOk = 1;
-    $check = getimagesize($_FILES["ProfilePicture"]["tmp_name"]);
-    if ($check !== false) {
-      $uploadOk = 1;
-    } else {
-      $uploadOk = 0;
-    }
-    if ($uploadOk == 0) {
-      echo "Sorry, your file was not uploaded.";
-    } else {
-      if (move_uploaded_file($_FILES["ProfilePicture"]["tmp_name"], $target_dir . $username .  '.' . $filetype)) {
-        echo "The file " . htmlspecialchars(basename($_FILES["ProfilePicture"]["name"])) . " has been uploaded.";
-      } else {
-        echo "Sorry, there was an error uploading your file.";
-      }
-    }
-    $profilePicURL = $username . '.' . $filetype;
-  }
-  return $profilePicURL;
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en" class="h-100">
@@ -134,12 +106,14 @@ function processUpload()
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <form class="was-validated border-dark" novalidate action='updateProfile.php' method='post'>
+          <form class="was-validated border-dark" novalidate action="updateProfile.php" method='post' enctype="multipart/form-data">
             <br>
             <div style='display:none;'><input type='radio' name='UID' id='UID' value="<?php echo $uid ?>" checked></div>
-            <label for="ProfilePicture" class="form-label">Edit Profile Picture:</label>
+              <div style='display:none;'><input type='radio' name='username' id='username' value="<?php echo $username ?>" checked></div>
+
+              <label for="ProfilePicture" class="form-label">Edit Profile Picture:</label>
             <br>
-            <input type="file" name="ProfilePicture" accept="image/*" id="ProfilePicture" value="<?php echo processUpload() ?>" />
+            <input type="file" name="ProfilePicture" accept="image/*" id="ProfilePicture" value="" />
 
             <div class="form-floating w-75 mx-auto">
               <input type="text" class="form-control" id="fname" name="fname" value="<?php echo $fname ?>" placeholder="<?php echo $fname ?>" required>
@@ -192,7 +166,7 @@ function processUpload()
                   <div style="width:150px;height:150px;">
                     <img src=<?php echo $profilePicUrl; ?> style="width:150px;height:150px;object-fit:cover;z-index:100" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2">
                   </div>
-                  <button onClick='editProfile(<?php echo $uid, $fname, $lname, $about, $email; ?>)' type="button" class="btn btn-outline-dark m-2 mt-3" data-mdb-ripple-color="dark" data-bs-toggle='modal' data-bs-target='#editModal' style="z-index: 1;">
+                  <button onClick='editProfile(<?php echo $uid, $fname, $lname, $aboutme, $email; ?>)' type="button" class="btn btn-outline-dark m-2" data-mdb-ripple-color="dark" data-bs-toggle='modal' data-bs-target='#editModal' style="z-index: 1;">
                     Edit profile
                   </button>
                   <input name="submit" type="submit" class="btn btn-outline-dark m-2 mt-1" data-mdb-ripple-color="dark" style="z-index: 1;" value="Log out">
