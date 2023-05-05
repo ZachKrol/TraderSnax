@@ -198,20 +198,6 @@ function processUpload()
                 </div>
               </div>
               <div class="p-4 text-black" style="background-color: #f8f9fa;">
-                <div class="d-flex justify-content-end text-center py-1">
-                  <div>
-                    <p class="mb-1 h5"><?php echo $reviews; ?></p>
-                    <p class="small text-muted mb-0">Reviews</p>
-                  </div>
-                  <div class="px-3">
-                    <p class="mb-1 h5"><?php echo $followers; ?></p>
-                    <p class="small text-muted mb-0">Followers</p>
-                  </div>
-                  <div>
-                    <p class="mb-1 h5"><?php echo $following; ?></p>
-                    <p class="small text-muted mb-0">Following</p>
-                  </div>
-                </div>
               </div>
               <div class="card-body p-4 text-black">
                 <div class="mb-5">

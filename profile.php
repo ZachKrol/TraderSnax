@@ -192,7 +192,7 @@ function processUpload()
                   <div style="width:150px;height:150px;">
                     <img src=<?php echo $profilePicUrl; ?> style="width:150px;height:150px;object-fit:cover;z-index:100" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2">
                   </div>
-                  <button onClick='editProfile(<?php echo $uid, $fname, $lname, $about, $email; ?>)' type="button" class="btn btn-outline-dark m-2" data-mdb-ripple-color="dark" data-bs-toggle='modal' data-bs-target='#editModal' style="z-index: 1;">
+                  <button onClick='editProfile(<?php echo $uid, $fname, $lname, $about, $email; ?>)' type="button" class="btn btn-outline-dark m-2 mt-3" data-mdb-ripple-color="dark" data-bs-toggle='modal' data-bs-target='#editModal' style="z-index: 1;">
                     Edit profile
                   </button>
                   <input name="submit" type="submit" class="btn btn-outline-dark m-2 mt-1" data-mdb-ripple-color="dark" style="z-index: 1;" value="Log out">
@@ -203,23 +203,9 @@ function processUpload()
                 </div>
               </div>
               <div class="p-4 text-black" style="background-color: #f8f9fa;">
-                <div class="d-flex justify-content-end text-center py-1">
-                  <div>
-                    <p class="mb-1 h5"><?php echo $reviews; ?></p>
-                    <p class="small text-muted mb-0">Reviews</p>
-                  </div>
-                  <div class="px-3">
-                    <p class="mb-1 h5"><?php echo $followers; ?></p>
-                    <p class="small text-muted mb-0">Followers</p>
-                  </div>
-                  <div>
-                    <p class="mb-1 h5"><?php echo $following; ?></p>
-                    <p class="small text-muted mb-0">Following</p>
-                  </div>
-                </div>
               </div>
-              <div class="card-body p-4 text-black">
-                <div class="mb-5">
+              <div class=" row card-body p-4 text-black">
+                <div class="mb-5" style="padding-top: 40px;">
                   <p class="lead fw-normal mb-1">About</p>
                   <div class="p-4" style="background-color: #f8f9fa;">
                     <p class="font-italic mb-1"><?php echo $aboutme; ?></p>
