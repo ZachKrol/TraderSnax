@@ -23,38 +23,40 @@
         </li>
       </ul>
       <ul class="navbar-nav mx-auto">
-        <form autocomplete="off" class="d-flex mb-0" data-bs-toggle="dropdown">
-          <input class="form-control me-2 rounded-pill" id="searchUser" name="searchUser" type="text" placeholder="Search Users" >
-         </form>
-        <ul class="dropdown-menu" id="searchResults" name="searchResults" style="position: absolute; left: 0; top: 100%; z-index: 1;">
-          <?php
-          session_start();
-          if ($_SESSION["loggedin"]) {
-            $config = parse_ini_file("dbconfig.ini");
+        <div style="position: relative;">
+          <form autocomplete="off" class="d-flex mb-0" data-bs-toggle="dropdown">
+            <input class="form-control me-2 rounded-pill" id="searchUser" name="searchUser" type="text" placeholder="Search Users">
+          </form>
+          <ul class="dropdown-menu" id="searchResults" name="searchResults" style="position: absolute; left: 0; top: 100%; z-index: 1;">
+            <?php
+            session_start();
+            if ($_SESSION["loggedin"]) {
+              $config = parse_ini_file("dbconfig.ini");
 
-            //Database connection
-            $link = new mysqli($config["servername"], $config["username"], $config["password"], $config["dbname"]);
-            if ($link->connect_error) {
-              die("Connection failed: " . $link->connect_error);
+              //Database connection
+              $link = new mysqli($config["servername"], $config["username"], $config["password"], $config["dbname"]);
+              if ($link->connect_error) {
+                die("Connection failed: " . $link->connect_error);
+              }
+
+              $currentUser = $_SESSION["username"];
+              $sqlPic = "SELECT * FROM users WHERE username = '$currentUser'";
+              $picResult = $link->query($sqlPic);
+              $picRowResult = $picResult->fetch_assoc();
+              $profilePicture = $picRowResult["profilePicURL"];
+
+              $sql = "select * FROM users";
+              $result = $link->query($sql);
+              while ($record = $result->fetch_assoc()) {
+                $username = $record['username'];
+                echo '<li><a class="dropdown-item" href="userPages.php?username=' . $username . '">' . $username . '</a></li>';
+              }
             }
 
-            $currentUser = $_SESSION["username"];
-            $sqlPic = "SELECT * FROM users WHERE username = '$currentUser'";
-            $picResult = $link->query($sqlPic);
-            $picRowResult = $picResult->fetch_assoc();
-            $profilePicture = $picRowResult["profilePicURL"];
-
-            $sql = "select * FROM users";
-            $result = $link->query($sql);
-            while ($record = $result->fetch_assoc()) {
-              $username = $record['username'];
-              echo '<li><a class="dropdown-item" href="userPages.php?username=' . $username . '">' . $username . '</a></li>';
-            }
-          }
-
-          $link->close();
-          ?>
-        </ul>
+            $link->close();
+            ?>
+          </ul>
+        </div>
       </ul>
       <ul class="navbar-nav ms-auto">
         <li class="nav-item bg-text-secondary mx-3">
