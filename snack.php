@@ -92,6 +92,10 @@
     $result2 = $sql2->get_result();
     $row2 = $result2->fetch_assoc();
     $numReviews = $row2["numReviews"];
+    if ($numReviews > 0) {
+      $rating = $rating / $numReviews;
+    }
+    $rating = round($rating, 1);
   } else {
     header("location: index.php");
   }

@@ -39,12 +39,22 @@ if ($_SESSION["loggedin"]) {
     $profilePicUrl = $profilePicUrl . $row["profilePicUrl"];
   }
 
+  //getting number of following
+  //$sql = "SELECT COUNT(*) as num_following FROM following WHERE followingid = $userid";
+  //$result = $link->query($sql);
+  //$row = $result->fetch_assoc();
+  //$following = $row["num_following"];
+  //number of followers
+  //$sql = "SELECT COUNT(*) as num_followers FROM following WHERE userid = $userid";
+  //$result = $link->query($sql);
+  //$row = $result->fetch_assoc();
+  //$followers = $row["num_followers"];
+
   $sql = "SELECT snackID, pictureURL FROM reviews WHERE username = '$username'";
   $result = $link->query($sql);
 } else {
   header("location: index.php");
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en" class="h-100">
@@ -167,23 +177,9 @@ if ($_SESSION["loggedin"]) {
                 </div>
               </div>
               <div class="p-4 text-black" style="background-color: #f8f9fa;">
-                <div class="d-flex justify-content-end text-center py-1">
-                  <div>
-                    <p class="mb-1 h5"><?php echo $reviews; ?></p>
-                    <p class="small text-muted mb-0">Reviews</p>
-                  </div>
-                  <div class="px-3">
-                    <p class="mb-1 h5"><?php echo $followers; ?></p>
-                    <p class="small text-muted mb-0">Followers</p>
-                  </div>
-                  <div>
-                    <p class="mb-1 h5"><?php echo $following; ?></p>
-                    <p class="small text-muted mb-0">Following</p>
-                  </div>
-                </div>
               </div>
-              <div class="card-body p-4 text-black">
-                <div class="mb-5">
+              <div class=" row card-body p-4 text-black">
+                <div class="mb-5" style="padding-top: 40px;">
                   <p class="lead fw-normal mb-1">About</p>
                   <div class="p-4" style="background-color: #f8f9fa;">
                     <p class="font-italic mb-1"><?php echo $aboutme; ?></p>

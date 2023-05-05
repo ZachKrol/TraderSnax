@@ -98,15 +98,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-<html lang="en" class="h-100">
+<DOCTYPE html lang="en" class="h-100">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
   <title>TraderSnax</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="icon" type="image/png" href="./images/TS_LOGO.png" />
+  <link rel="icon" type="image/png" href="./images/TS_LOGO.png" >
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <style>
@@ -144,10 +144,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <div class="valid-feedback">Valid.</div>
       <div class="invalid-feedback"><?php echo $password_err; ?></div>
     </div>
-    <!-- <div class="form-check mb-3">
-      <input class="form-check-input" type="checkbox" id="myCheck" name="remember">
-      <label class="form-check-label" for="myCheck">Remember Me.</label>
-    </div> -->
     <div class="text-center w-75 d-grid mx-auto">
       <button type="submit" class="btn btn-outline-info btn-lg">Log In</button>
       <br>
