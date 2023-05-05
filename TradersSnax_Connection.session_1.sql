@@ -45,7 +45,6 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`userID`, `username`, `password`, `email`, `fname`, `lname`, `aboutme`, `following`, `followers`, `reviews`, `profilePicURL`) VALUES
-(1000, 'test', '$2y$10$YRo4B2hJQeYXzq0PaUA7ROQB48Qj3iShDTCrpTPbGD03eOhCIBPuW', 'test@test.com', 'testFirstName', 'testLastName', 'just testing things', 233, 221 ,4, 'default.png'),
 (1001, 'SnackerAttacker', '$2y$10$YRo4B2hJQeYXzq0PaUA7ROQB48Qj3iShDTCrpTPbGD03eOhCIBPuW', 'snackattack@test.com', 'Snacker', 'Attacker', 'Snacks are made to be reviewed. No mercy from me, I will attack any snack!', 0, 0 ,0, 'SnackerAttacker.png'),
 (1002, 'TraderGator', '$2y$10$YRo4B2hJQeYXzq0PaUA7ROQB48Qj3iShDTCrpTPbGD03eOhCIBPuW', 'tradergator@test.com', 'Trader', 'Gator', 'I go to the University of Florida and I just love Trader Joes snacks!', 0, 0 ,0, 'TraderGator.png'),
 (1003, 'BillyBob', '$2y$10$YRo4B2hJQeYXzq0PaUA7ROQB48Qj3iShDTCrpTPbGD03eOhCIBPuW', 'billybob@test.com', 'Billy', 'Bob', 'I want to try new snacks and see what others have to say about them. If you are like that too, then give me a follow.', 0, 0 ,0, 'BillyBob.png'),
@@ -79,11 +78,6 @@ CREATE TABLE IF NOT EXISTS `reviews` (
 --
 
 INSERT INTO `reviews` (`reviewID`, `username`, `snackID`, `rating`, `reviewText`, `pictureURL`, `likes`) VALUES
-(1000, 'test', 'Milk Chocolate Peanut Butter Cups', 4.0, 'example review', 'milk-chocolate-peanut-butter-cup.webp', 1),
-(1001, 'test', 'Spanish Style Rice', 3.0, 'example review', 'spanish-style-rice.webp', 1),
-(1002, 'test', 'Instant Boba Kit', 4.0, 'example review', 'instant-boba-kit.webp', 1),
-(1003, 'test', 'Buffalo Style Chickenless Wings', 5.0, 'example review', 'buffalo-style-chickenless-wings.webp', 1),
-(1004, 'test', 'Plantain Chips', 2.0, 'These plantain chips suck', 'plantain-chips.webp', 0),
 (1005, 'SnackerAttacker', 'Plantain Chips', 1.0, 'These are like rocks! yuck!', 'plantain-chips.webp', 0),
 (1006, 'TraderGator', 'Plantain Chips', 5.0, 'These rock! yum!', 'plantain-chips.webp', 0),
 (1007, 'BillyBob', 'Plantain Chips', 3.0, '', 'plantain-chips.webp', 0),
